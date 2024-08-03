@@ -1,0 +1,51 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+
+
+{% block title %}
+    Listagem de dados do Indicador 1 - {{ indicator.quadrimester }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid">
+        <section id="list_header">
+        <h1>Gestantes consideradas para cálculo do indicador 1 - {{ indicator.quadrimester }}</h1>
+
+            <div class="accordion container-fluid" id="accordionfilter">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#product_filter" aria-expanded="true" aria-controls="collapseOne">
+                        Filtro
+                      </button>
+                    </h2>
+                    <div id="" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionfilter">
+                      <div class="accordion-body">
+                            
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+        <section id="list_content">
+            <div class="container-fluid" id="item_list">
+            {% include 'indicadores/indicator1_data_list_partial.html' %}
+            </div>
+        </section>
+
+
+    </div>
+
+{% endblock content %}
+{% block scripts %}
+
+    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
+  
+{% endblock scripts %}

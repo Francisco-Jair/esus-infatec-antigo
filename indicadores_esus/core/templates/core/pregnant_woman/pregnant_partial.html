@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            {% include 'core/pregnant_woman/pregnant_dash_partial.html' %}
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-check-square"></i>
+                        <div class="badge alert-dark"> Selecione um filtro para a operacionalização</div>
+                    </h3>
+                </div>
+
+                <div class="card-body clearfix">
+                    <strong class="text-right">Filtro</strong>
+                    <form action="#" method="get" id="filter_form" hx-get="{% url 'core:pregnant_list_htmx' %}"
+                          hx-target="#pregnant_section" hx-include="[id='filter_form']" hx-indicator="#indicator">
+
+                        <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                tabindex="-1" aria-hidden="true" name="select_filter" id="id_select_filter"
+                                hx-get="{% url 'core:pregnant_list_htmx' %}" hx-target="#pregnant_section"
+                                hx-indicator="#indicator">
+                            {% for k, v in form.fields.select_filter.choices %}
+                                <option value="{{ k }}"{% if form.data.select_filter == k %}
+                                        selected{% endif %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
+                        <strong>Unidade de Saúde</strong>
+                        <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                tabindex="-1" aria-hidden="true" name="health_unit" id="id_health_unit"
+                                hx-get="{% url 'core:pregnant_list_htmx' %}" hx-target="#pregnant_section"
+                                hx-indicator="#indicator">
+                            {% for k, v in form.fields.health_unit.choices %}
+                                <option value="{{ k }}"{% if form.data.health_unit == k|slugify %}
+                                        selected{% endif %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
+                        <strong>Equipe de Saúde</strong>
+                        <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                tabindex="-1" aria-hidden="true" name="health_team" id="id_health_team"
+                                hx-get="{% url 'core:pregnant_list_htmx' %}" hx-target="#pregnant_section"
+                                hx-indicator="#indicator">
+                            {% for k, v in form.fields.health_team.choices %}
+                                <option value="{{ k }}"{% if form.data.health_team == k|slugify %}
+                                        selected{% endif %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
+                        <strong>Sem vinculo </strong>
+                        <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                <option class="" value="1">Buscar</option>
+                                <option class="" value="2">Buscar</option>
+                                <option class="" value="3">todos</option>
+
+
+                        </select>
+                        Pesquisa
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="cns_cpf_name" id="id_cns_cpf_name"
+                                   placeholder="Busca por CPF/NOME/CNS da Gestante"
+                                   class="form-control"
+                                   hx-get="{% url 'core:pregnant_list_htmx' %}" hx-target="#pregnant_section"
+                                   hx-indicator="#indicator"
+                                   value="{{ form.data.cns_cpf_name }}">
+                            <span class="input-group-append">
+                                        <button type="submit" class="btn btn-primary btn-flat">Ir!</button>
+                                    </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="indicator" class="d-flex justify-content-center htmx-indicator">
+    <div class="spinner-border text-dark" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card" id="item_list">
+                {% include 'core/pregnant_woman/pregnant_list_partial.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.col -->

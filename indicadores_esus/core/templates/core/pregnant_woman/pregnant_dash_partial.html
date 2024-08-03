@@ -1,0 +1,33 @@
+{% load static %}
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">
+            <img src="{% static 'core/dist/img/gravida.png' %}">
+            <div class="badge alert-dark"> Indicadores 1, 2 e 3
+            </div>
+        </h4>
+    </div>
+
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text-dark"><strong>Número de Gestantes </strong>
+                </p>
+                <span class="alert alert-dark"><strong>{{ page_obj.paginator.count }}</strong></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text-dark"><strong>No Quadrimestre </strong>
+                </p>
+                <span class="alert alert-dark" role="alert"><strong>{{ page_obj.paginator.count }}</strong></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text-dark"><strong>Sem Consulta no Mês </strong></p>
+                <span class="alert alert-dark" role="alert"><strong>{{ no_apponintments_on_month }}</strong> </span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<a id="btn_print_all" href="{% url 'core:print_pregnant_list' %}" target="_blank" class="btn btn-dark" onmouseover="print_filters()"><i class="fa fa-print"></i> Imprimir Dados</a>
+<a id="btn_print_not_achieved" href="{% url 'core:print_pregnant_list' %}?type=not_achieved" target="_blank" class="btn btn-danger" onmouseover="print_filters()"><i class="fa fa-print"></i> Imprimir Não Alcançados</a>
+<a id="btn_print_achieved" href="{% url 'core:print_pregnant_list' %}?type=achieved" target="_blank" class="btn btn-success" onmouseover="print_filters()"><i class="fa fa-print"></i> Imprimir Alcançados</a>

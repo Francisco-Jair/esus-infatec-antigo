@@ -1,0 +1,186 @@
+<style>
+
+    .center {
+        margin: auto;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+    }
+
+    table tr > th,
+    table tr > td {
+        padding: 10px;
+        border: #bbb 1px solid;
+    }
+
+    tr > td:first-child {
+        white-space: nowrap;
+    }
+</style>
+
+<div class="row mt-4 d-flex justify-content-center">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+        <div style="text-align:center" class="position-relative p-3 bg-gradient-white" style="width: 180px">
+            <div class="card-outline-tabs">
+                <div class="ribbon bg-gradient-primary text-lg">
+                    <i class="fa fa-microscope"></i> Indicador 4
+                </div>
+            </div>
+            <br>
+            <h5> Proporção de mulheres com coleta de citopatológico na APS</h5>
+            <br>
+            <h5><strong>  {{ summary.ind_4 }} de {{ summary.total }} alcançados <i class="fa fa-bar-chart"></i>
+                - {{ summary.ind_4_percent }}%</strong>
+            </h5>
+            <br>
+        </div>
+    </div>
+    <div class="col-sm-4">
+    </div>
+</div>  <br>
+
+<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="overflow-x:auto;">
+    <thead>
+        <tr>
+            <th class="text-dark"><i class="fa fa-user" aria-hidden="true"></i> Nome</th>
+            <th CPF class="text-dark"><i class="fa fa-window-maximize" aria-hidden="true"></i> CPF / CNS</th>
+            <th class="text-dark"><i class="fa fa-calendar-day" aria-hidden="true"></i> Idade</th>
+            <th class="text-dark"><i class="fa fa-building" aria-hidden="true"></i> Unidade vinculada</th>
+            <th class="text-dark"><i class="fa fa-users" aria-hidden="true"></i> Equipe Associada</th>
+            <th class="text-dark"><i class="fa fa-microscope" aria-hidden="true"></i> Indicador 4</th>
+            <th class="text-primary"><i class="fa fa-search-plus" aria-hidden="true"></i> Visualizar</th>
+        </tr>
+    </thead>
+    <tbody>
+    <div class="container col-12" id="box">
+        <div class="row well">
+            {% for woman in page_obj %}
+                <tr class="dt-responsive nowrap">
+                    <td>
+                        {{ woman.patient.person.name }}
+                    </td>
+                    <td>
+                        {% if woman.patient.person.cpf %}
+                            {{ woman.patient.person.cpf }}
+                        {% else %}
+                            <strong>CPF não cadastrado / </strong>
+                        {% endif %}
+                        {% if woman.patient.person.cns %}
+                            {{ woman.patient.person.cns }}
+                        {% else %}
+                            <strong> / CNS não cadastrado</strong>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ woman.patient.person.birth_date|timesince }}    
+                    </td>
+                    <td>
+                        {% if woman.patient.health_unit %}
+                            {{ woman.patient.health_unit }}
+                        {% else %}
+                            <strong>Não possui</strong>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if woman.patient.health_team %}
+                            <div class="badge badge-dark text-white">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                {{ woman.patient.health_team }}
+                            </div>
+                        {% else %}
+                            <strong>Não possui</strong>
+                        {% endif %}
+                    </td>
+                    <td class="text-dark">
+                        <strong>{{ woman.cytopathological_qty }}</strong><br>
+                        {% if woman.indicator_4_achieved %}
+                            <div class="badge badge-success text-white">
+                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                Alcançado
+                            </div>
+                        {% else %}
+                            <div class="badge badge-danger text-white">
+                                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                Não Alcançado
+                            </div> 
+                        {% endif %}
+                    </td>
+                    <td class="text-danger">
+                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"
+                            data-target="#myModal" hx-get="{% url 'core:woman_detail' woman.pk %}"
+                            hx-target="#myModal">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </div>
+    </div>
+    </tbody>
+</table>
+<!-- Modal -->
+
+<div class="modal fade" id="myModal" role="dialog">
+    {% include 'core/woman/woman_modal_partial.html' %}
+</div>
+
+<script>
+    function myFunction() {
+        window.print();
+    };
+</script>
+<script>
+    function closeModal() {
+        var container = document.getElementById("modals-here")
+        var backdrop = document.getElementById("modal-backdrop")
+        var modal = document.getElementById("modal")
+
+        modal.classList.remove("show")
+        backdrop.classList.remove("show")
+
+        setTimeout(function () {
+            container.removeChild(backdrop)
+            container.removeChild(modal)
+        }, 200)
+    }
+</script>
+<script src="exportToExcel.js" defer></script>
+
+<style>
+    td {
+        text-align: center; /* alinhamento horizontal */
+        vertical-align: middle; /* alinhamento vertical */
+    }
+
+    th {
+        text-align: center; /* alinhamento horizontal */
+        vertical-align: middle; /* alinhamento vertical */
+    }
+</style>
+<script>
+    function print_filters() {
+        var unit = $('#id_health_unit').val();
+        var team = $('#id_health_team').val();
+        var href_all = $("#btn_print_all").attr("href");
+        var href_achieved = $("#btn_print_achieved").attr("href");
+        var href_not_achieved = $("#btn_print_not_achieved").attr("href");
+        var base_url = "{% url 'core:print_women_list' %}";
+        if (unit != '') {
+            $("#btn_print_all").attr("href",base_url+"?health_unit="+unit+"&health_team="+team);
+            $("#btn_print_achieved").attr("href",base_url+"?type=achieved&health_unit="+unit+"&health_team="+team);
+            $("#btn_print_not_achieved").attr("href",base_url+"?type=not_achieved&health_unit="+unit+"&health_team="+team);
+        } else {
+            var help_text = "Selecione uma unidade de saúde no filtro"
+            $("#btn_print_all").removeAttr("href");
+            $("#btn_print_achieved").removeAttr("href");
+            $("#btn_print_not_achieved").removeAttr("href");
+            $('#btn_print_all').prop('title', help_text);
+            $('#btn_print_achieved').prop('title', help_text);
+            $('#btn_print_not_achieved').prop('title', help_text);
+        };
+    }
+</script>
+
+{% include 'core/footer_paginator.html' %}

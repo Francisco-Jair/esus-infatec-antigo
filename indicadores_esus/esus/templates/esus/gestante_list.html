@@ -1,0 +1,74 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+
+
+{% block title %}
+    Listagem de gestantes
+{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid">
+{#        <section id="list_header">#}
+        <h1>Atendimentos a gestantes</h1>
+{##}
+{#            <div class="accordion container-fluid" id="accordionfilter">#}
+{#                <div class="accordion-item">#}
+{#                    <h2 class="accordion-header" id="headingOne">#}
+{#                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#product_filter" aria-expanded="true" aria-controls="collapseOne">#}
+{#                        Filtro#}
+{#                      </button>#}
+{#                    </h2>#}
+{#                    <div id="product_filter" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionfilter">#}
+{#                      <div class="accordion-body">#}
+{#                            <form method="get"  hx-get="{% url 'esus:cidadao_list_htmx'%}" hx-target="#item_list"#}
+{#                            autocomplete="off" id="filter_form" hx-include="[id='filter_form']">#}
+{#                                <div class="row p-2">#}
+{#                                    <div class="col-3">#}
+{#                                        <label for="name_filter">Nome</label>#}
+{#                                        <input id="name_filter" name="name" hx-trigger="keyup changed delay:250ms, search"#}
+{#                                        hx-get="{% url 'esus:cidadao_list_htmx'%}" hx-target="#item_list" type="search" class="form-control"#}
+{#                                        placeholder="Digite para pesquisar...">#}
+{#                                    </div>#}
+{#                                    <div class="col-3">#}
+{#                                        <label for="local_filter">Localidade</label>#}
+{#                                        <input id="local_filter" name="local" hx-trigger="keyup changed delay:250ms, search"#}
+{#                                        hx-get="{% url 'esus:cidadao_list_htmx'%}" hx-target="#item_list" type="search" class="form-control"#}
+{#                                        placeholder="Digite para pesquisar...">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </form>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{##}
+{#        </section>#}
+
+        <section id="list_content">
+            <div class="container-fluid" id="item_list">
+            {% include 'esus/gestante_list_partial.html' %}
+            </div>
+        </section>
+
+
+    </div>
+
+{% endblock content %}
+{% block scripts %}
+    <script>
+    $('form#id-create_product_form').submit(function(){
+        $(this).find(':input[type=submit]').prop('disabled', true).val('Salvando...');
+        $(this).find(':button').prop('disabled', true);
+        $(this).find('.spinner-border').removeAttr('hidden');
+    });
+
+    </script>
+    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
+
+{% endblock scripts %}

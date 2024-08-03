@@ -1,0 +1,65 @@
+{% load custom_tags %}
+
+<div class="row">
+    <div class="col-md">
+        Exibindo itens {{ page_obj.start_index }} a {{ page_obj.end_index }} de um total de {{ page_obj.paginator.count }}
+        que atendem aos critérios de busca selecionados.
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md">
+          Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+    </div>
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="row">
+    <div class="col-lg-12">
+        Ir para:
+          {% if page_obj.has_previous %}
+            <button class='btn' hx-get="{{ filter_url }}?{% param_replace page=1 %}"
+                                hx-target="{{ htmx_target }}">
+                <ins class="text-primary">Primeira</ins>
+            </button>
+
+            {% if page_obj.previous_page_number != 1 %}
+              <button class='btn' hx-get="{{ filter_url }}?{% param_replace page=page_obj.previous_page_number %}"
+                                  hx-target="{{ htmx_target }}">
+                  <ins class="text-primary">Anterior</ins>
+              </button>
+            {% endif %}
+          {% endif %}
+          {% if page_obj.has_next %}
+            {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+              <button class='btn' hx-get="{{ filter_url }}?{% param_replace page=page_obj.next_page_number %}"
+                                  hx-target="{{ htmx_target }}">
+                  <ins class="text-primary">Próxima</ins>
+              </button>
+
+            {% endif %}
+            <button class='btn' hx-get="{{ filter_url }}?{% param_replace page=page_obj.paginator.num_pages %}"
+                                hx-target="{{ htmx_target }}">
+                   <ins class="text-primary">Última</ins>
+            </button>
+          {% endif %}
+    </div>
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-md">
+            <label for="id_pg_sz">Itens por página</label>
+            <select class="form-select-sm" name="page_size" id="id_pg_sz" form="filter_form"
+                    hx-get="{{ filter_url }}"
+                    hx-target="{{ htmx_target }}" hx-include="[id='filter_form']">
+                <option value="100">--</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="{{ page_obj.paginator.count }}">Tudo</option>
+            </select>
+    </div>
+</div>

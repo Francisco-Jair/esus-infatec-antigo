@@ -1,0 +1,231 @@
+<div class="modal-dialog modal-xl">
+<div class="modal-content">
+
+
+        <div class="modal-dialog-scrollable">
+            <h4 class="modal-xl left">
+                <i class="fa fa-female" aria-hidden="true"> <strong> {{ obj.patient.person.name }} </strong> </i>
+                <button type="button" class="close text-danger" data-dismiss="modal" aria-label=" "><span
+                        aria-hidden="true"> <strong> <h6> </h6> </strong>  </span></button>
+            </h4>
+        </div>
+    <div class="container-fluid">
+
+        <div class="row">
+        <div class="col-md-12">
+                    <p style="margin-bottom: 0px">
+                        <b>Indicador 4</b><br>
+                        proporção de mulheres com coleta de citopatológico na APS
+                    </p>
+                    <span id="label-indicador_1">
+                        {% if obj.first_indicator_achieved %}
+                            <span class="badge badge-success text-white"> Alcançado <i class="fa fa-close"></i></span>
+                        {% else %}
+                            <span class="badge badge-danger text-white"> Não Alcançado <i
+                                    class="fa fa-close"></i></span>
+                        {% endif %}
+                    </span>
+                    <hr style="margin-top: 10px; margin-bottom: 10px">
+                    {% for msg in obj.indicator_1_msgs %}
+                        <span id="label-descricao_1">{{ msg }}</span>
+                    {% endfor %}
+                </div>
+            <div class="col-md-4">
+                <div class="form-group-lg">
+                    <label>CPF</label>
+
+                    <input type="text" id="info_cpf" readonly="" class="form-control"
+                            placeholder="{% if obj.patient.person.cpf %}{{ obj.patient.person.cpf }}{% else %}-{% endif %}">
+
+                    <label>Total de Consultas</label>
+                    <input type="text" id="info_total_consultas" readonly="" class="form-control"
+                            placeholder="{{ obj.medical_appointments_quantity }}">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group-lg">
+
+                    <label>CNS</label>
+                    <input type="text" id="info_cns" readonly="" class="form-control"
+                            placeholder="{{ obj.patient.person.cns }}">
+
+                    <label>Cadastro Unificado?</label>
+                    <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                            placeholder="-">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group-lg">
+
+                    <label>DT Nascimento</label>
+                    <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                            placeholder="{{ obj.patient.person.birth_date|date:"SHORT_DATE_FORMAT" }}">
+
+
+                    <label>Sexo</label>
+                    <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                            placeholder="{% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <hr>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Mãe</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control"
+                    placeholder="{{ obj.patient.person.mother }}">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Pai</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control"
+                    placeholder="{{ obj.patient.person.father }}">
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Logradouro</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control" placeholder="{{ address.street }}">
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>Numero</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control" placeholder="{{ address.number }}">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Bairro</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control" placeholder="{{ address.neighborhood }}">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>CEP</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control" placeholder="{{ address.cep }}">
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <hr>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Equipe</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control"
+                    placeholder="{% if obj.patient.health_team %}{{ obj.patient.health_team }}{% else %}-{% endif %}">
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Unidade</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control"
+                    placeholder="{% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                </div>
+            </div> <div class="col-md-6">
+                <div class="form-group">
+                    <label>INE</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control"
+                    placeholder="{% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                </div>
+            </div> <div class="col-md-6">
+                <div class="form-group">
+                    <label>CNES</label>
+                    <input type="text" id="info_no_mae" readonly="" class="form-control"
+                    placeholder="{% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <p>
+                        {% comment %} <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1"
+                            role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Consultas
+                            com Enfermeiro</a> {% endcomment %}
+
+                        <button class="btn btn-success" type="button" data-toggle="collapse"
+                                data-target=".multi-collapse" aria-expanded="false"
+                                aria-controls="multiCollapseExample1 ">
+                            Procedimentos
+                        </button>
+
+                        <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                data-target=".multi-collapse" aria-expanded="false"
+                                aria-controls="multiCollapseExample2 multiCollapseExample1 ">
+                            Atendimentos
+                        </button>
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <div class="card card-body">
+                                    <strong> Atendimento realizado a 11 meses e 28 dias</strong>
+                                    <b>ABPG010</b> - COLETA DE CITOPATOLÓGICO DE COLO UTERINO
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                    <div class="card card-body">
+                                        <strong> Atendimento realizado a 7 meses e 22 dias</strong>
+                                        <b>ABPG010</b> - COLETA DE CITOPATOLÓGICO DE COLO UTERINO
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                        <div class="card card-body">
+                                            <strong> Atendimento realizado a 9 meses e 02 dias</strong>
+                                            CIAPS: | | <br>
+
+                                            CIDS: | E14 |<br>
+
+                                            Exames Avaliados: | |<br>
+
+                                            Exames Solicitados: | ABEX008 |<br>
+
+                                            Profissional CBO: 225125 - MÉDICO CLÍNICO<br>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+
+<script src="exportToExcel.js" defer></script>

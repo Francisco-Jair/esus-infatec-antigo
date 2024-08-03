@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    env_file:
+      - .env_docker_linux
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    network_mode: host
+  djangoq:
+    build: .
+    command: python manage.py qcluster
+    volumes:
+      - .:/code
+    env_file:
+      - .env_docker_linux
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    network_mode: host
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - "5432:5432"
+volumes:
+  postgres_data:

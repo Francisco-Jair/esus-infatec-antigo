@@ -1,0 +1,848 @@
+{% load static %}
+
+{% load bootstrap4 %}
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <style>
+        /*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+        .progress {
+            width: 150px;
+            height: 150px;
+            background: none;
+            position: relative;
+        }
+
+        .progress::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid #eee;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .progress > span {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
+
+        .progress .progress-left {
+            left: 0;
+        }
+
+        .progress .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border-width: 6px;
+            border-style: solid;
+            position: absolute;
+            top: 0;
+        }
+
+        .progress .progress-left .progress-bar {
+            left: 100%;
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border-left: 0;
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+        }
+
+        .progress .progress-right {
+            right: 0;
+        }
+
+        .progress .progress-right .progress-bar {
+            left: -100%;
+            border-top-left-radius: 80px;
+            border-bottom-left-radius: 80px;
+            border-right: 0;
+            -webkit-transform-origin: center right;
+            transform-origin: center right;
+        }
+
+        .progress .progress-value {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+
+        .rounded-lg {
+            border-radius: 1rem;
+        }
+
+        .text-gray {
+            color: #aaa;
+        }
+
+        div.h4 {
+            line-height: 1rem;
+        }
+
+        }
+
+        table tr > th,
+        table tr > td {
+            padding: 10px;
+            border: #bbb 1px solid;
+        }
+
+        tr > td:first-child {
+            white-space: nowrap;
+        }
+
+        @media print {
+            .pagebreak {
+                clear: both;
+                page-break-after: always;
+            }
+        }
+
+    </style>
+
+
+    <title>{% block title %}Impressão {% endblock title %}</title>
+
+    <!-- Font Awesome Icons -->
+    <script src="{% static 'core/plugins/jquery/jquery.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'core/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet"
+          href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet"
+          href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+          href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/summernote/summernote-bs4.min.css">
+
+    <style type="text/css">/* Chart.js */
+
+    .card {
+        box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);
+        padding: 24px;
+    }
+
+
+    </style>
+</head>
+<!-- Theme style -->
+<link rel="stylesheet" href="{% static 'core/dist/css/adminlte.min.css' %}">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{% block css %}
+{% endblock css %}
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+
+
+<br>
+{% for health_unit in obj %}
+    <div class="row" style="padding: 30px;">
+        <div class="card col-md-3" style="padding: 24px; border-bottom: 2px solid #000; font-size: 16px !important">
+
+
+            <h6><strong>Lista de dados do indicador 5 </strong></h6>
+            <h6><strong>{{ quadrimester.quad }}º quadrimestre de {{ quadrimester.year }} </strong></h6>
+            <h5><strong>Cidade :</strong> {{ city }} </h5>
+            <h5><strong>Unidade :</strong> {{ health_unit.name }} </h5>
+            <h5><strong>CNES :</strong> {{ health_unit.cnes }}</h5>
+        </div>
+    </div>
+    <div class="card" style="padding: 24px; font-size: 16px !important">
+
+
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <hr>
+            </div>
+            <div class="col-lg-12 text-center">
+
+                <strong>Legenda dos Icones</strong>
+
+
+            </div>
+            <br>
+            <hr>
+            <table id="example" class="table table-hover table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th> Indicador Alcançado</th>
+                    <th>Indicador Não Alcançado</th>
+                    <th> Não possui equipe vinculada</th>
+                    <th>Não possui cadastro individual</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><i class="text-center text-success fa fa-thumbs-up"></i></td>
+                    <td><i class="text-center text-danger fa fa-thumbs-down"></i></td>
+                    <td><i class="text-center fa fa-exclamation-triangle text-warning" aria-hidden="true"></i></td>
+                    <td><i class="text-center fa fa-user-edit text-info"></i></td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
+
+    </div>
+
+    {% if show_summary %}
+        <div class="row mt-4 d-flex justify-content-center">
+            <div class="col-sm-4">
+
+
+            </div>
+
+            <div class="col-sm-4">
+                <div style="text-align:center" class="position-relative p-3 bg-gray-light" style="width: 180px">
+
+                    <div class="card-outline-tabs">
+                        <div class="ribbon bg-primary text-lg">
+                            <i class="fa fa-microscope"></i> Indicador 5</i>
+                        </div>
+                    </div>
+                    <br>
+                    <h5> Proporção de crianças de 1 (um)  <br> ano de idade vacinadas na APS
+                        <h5><br>
+                            <h5><strong>   {{ health_unit.indicator_2_qty }} de {{ health_unit.total_qty }} alcançados
+                                <i
+                                        class="fa fa-bar-chart"></i>
+                                - <i class="fas fa-chart-bar"></i> {{ health_unit.indicator_2_percent|floatformat }}%
+                            </h5>
+                            <br></strong></h5>
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+
+            </div>
+        </div>
+    {% endif %}
+
+    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="overflow-x:auto;">
+        <thead>
+        <tr class="th">
+
+            <th class="text-dark" style="width: 5%"><i class="fa fa-" aria-hidden="true"></i> #</th>
+            <th class="text-dark" style="width: 26%"><i class="fa fa-user" aria-hidden="true"></i> Nome</th>
+            <th CPF class="text-dark" style="width: 15%"><i class="fa fa-window-maximize" aria-hidden="true"></i> CPF /
+                CNS
+            </th>
+
+
+            <th class="text-dark" style="width: 8%"><i class="fa fa-calculator" aria-hidden="true"></i> Contabiliza</th>
+
+
+
+            <th class="text-dark" style="width: 12%"><i class="fas fa-syringe "></i> Indicador 5</th>
+
+
+            <th class="text-darrk " style="width: 13%"><i class="fa fa-closed-captioning" aria-hidden="true"></i>
+                Legenda
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for patient in health_unit.patient_list %}
+            <tr class="dt-responsive nowrap">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ patient.person.name }}</td>
+                <td>
+                    {% if patient.person.cpf %}{{ patient.person.cpf }}{% else %}
+                        <strong>CPF não cadastrado</strong>{% endif %} /
+                    {% if patient.person.cns %}{{ patient.person.cns }}{% else %}
+                        <strong>CNS não cadastrado</strong>{% endif %}
+                </td>
+                <td>
+                    Sim
+                </td>
+                <td class="text-dark">
+                    <strong> {{ patient.pregnant_rec.medical_appointments_qty }} </strong><br>
+
+                    {% if patient.pregnant_rec.indicator_1_achieved %}
+                        <div class="badge badge-success text-white">
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            Alcançado
+                        </div>
+                    {% else %}
+                        <div class="badge badge-danger text-white">
+                            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                            Não Alcançado
+                        </div>
+                    {% endif %}
+
+                </td>
+                <td class="text-dark">
+                    <strong> {{ patient.pregnant_rec.procedures_qty }} </strong><br>
+
+                    {% if patient.pregnant_rec.indicator_2_achieved %}
+                        <div class="badge badge-success text-white">
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            Alcançado
+                        </div>
+                    {% else %}
+                        <div class="badge badge-danger text-white">
+                            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                            Não Alcançado
+                        </div>
+                    {% endif %}
+                </td>
+                <td class="text-dark">
+                    <strong> {{ patient.pregnant_rec.dental_appointments_qty }} </strong><br>
+
+                    {% if patient.pregnant_rec.indicator_3_achieved %}
+                        <div class="badge badge-success text-white">
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            Alcançado
+                        </div>
+                    {% else %}
+                        <div class="badge badge-danger text-white">
+                            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                            Não Alcançado
+                        </div>
+                    {% endif %}
+                </td>
+
+
+                <td class="text-danger">
+                    <i style="width: 20px" class="text-danger fa fa-thumbs-down"></i>
+                    <i style="width: 20px" class="text-success fa fa-thumbs-up"></i>
+                    <i style="width: 20px " class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>
+                    <i style="width: 20px" class="fa fa-user-edit text-info"></i>
+                </td>
+            </tr>
+        {% empty %}
+            <td class="text-dark" colspan="8">Sem registros</td>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagebreak"></div>
+{% endfor %}
+
+<script>
+    function myFunction() {
+        window.print();
+    };
+</script>
+
+
+<style>
+    td {
+        text-align: center; /* alinhamento horizontal */
+        vertical-align: middle; /* alinhamento vertical */
+    }
+
+    th {
+        text-align: center; /* alinhamento horizontal */
+        vertical-align: middle; /* alinhamento vertical */
+    }
+</style>
+
+</body><!-- /.content -->
+
+<!-- /.content-wrapper -->
+
+<!-- Control Sidebar -->
+
+
+<!-- Main Footer -->
+
+</div>
+<footer class="footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+        Versão 1.0
+    </div>
+    <!-- Default to the left -->
+    <strong> Infatec &copy; Soluções Tecnológicas .</strong> Todos os direitos reservado
+</footer>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+
+<!-- Bootstrap 4 -->
+<script src="{% static 'core/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'core/dist/js/adminlte.min.js' %}"></script>
+<script src="{% static 'core/plugins/select2/js/select2.full.min.js' %}"></script>
+<script nonce="082dd0ba-d12d-4da3-9d08-10fdd98784be">(function (w, d) {
+    !function (a, e, t, r) {
+        a.zarazData = a.zarazData || {};
+        a.zarazData.executed = [];
+        a.zaraz = {deferred: []};
+        a.zaraz.q = [];
+        a.zaraz._f = function (e) {
+            return function () {
+                var t = Array.prototype.slice.call(arguments);
+                a.zaraz.q.push({m: e, a: t})
+            }
+        };
+        for (const e of ["track", "set", "ecommerce", "debug"]) a.zaraz[e] = a.zaraz._f(e);
+        a.zaraz.init = () => {
+            var t = e.getElementsByTagName(r)[0], z = e.createElement(r), n = e.getElementsByTagName("title")[0];
+            n && (a.zarazData.t = e.getElementsByTagName("title")[0].text);
+            a.zarazData.x = Math.random();
+            a.zarazData.w = a.screen.width;
+            a.zarazData.h = a.screen.height;
+            a.zarazData.j = a.innerHeight;
+            a.zarazData.e = a.innerWidth;
+            a.zarazData.l = a.location.href;
+            a.zarazData.r = e.referrer;
+            a.zarazData.k = a.screen.colorDepth;
+            a.zarazData.n = e.characterSet;
+            a.zarazData.o = (new Date).getTimezoneOffset();
+            a.zarazData.q = [];
+            for (; a.zaraz.q.length;) {
+                const e = a.zaraz.q.shift();
+                a.zarazData.q.push(e)
+            }
+            z.defer = !0;
+            for (const e of [localStorage, sessionStorage]) Object.keys(e || {}).filter((a => a.startsWith("_zaraz_"))).forEach((t => {
+                try {
+                    a.zarazData["z_" + t.slice(7)] = JSON.parse(e.getItem(t))
+                } catch {
+                    a.zarazData["z_" + t.slice(7)] = e.getItem(t)
+                }
+            }));
+            z.referrerPolicy = "origin";
+            z.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(a.zarazData)));
+            t.parentNode.insertBefore(z, t)
+        };
+        ["complete", "interactive"].includes(e.readyState) ? zaraz.init() : a.addEventListener("DOMContentLoaded", zaraz.init)
+    }(w, d, 0, "script");
+})(window, document);</script>
+
+{% block scripts %}
+    <!-- jQuery -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/moment/moment.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/adminlte.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/demo.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/chart.js/Chart.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+
+        $(function () {
+
+            $(".progress").each(function () {
+
+                var value = $(this).attr('data-value');
+                var left = $(this).find('.progress-left .progress-bar');
+                var right = $(this).find('.progress-right .progress-bar');
+
+                if (value > 0) {
+                    if (value <= 50) {
+                        right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+                    } else {
+                        right.css('transform', 'rotate(180deg)')
+                        left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+                    }
+                }
+
+            })
+
+            function percentageToDegrees(percentage) {
+
+                return percentage / 100 * 360
+
+            }
+
+        });
+        $(function () {
+            /* ChartJS
+            * -------
+            * Here we will create a few charts using ChartJS
+            */
+
+            //--------------
+            //- AREA CHART -
+            //--------------
+
+            // Get context with jQuery - using jQuery's .get() method.
+            var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+            var areaChartData = {
+                labels: ['Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                datasets: [
+                    {
+                        label: 'Valores Esperado Indicador Geral',
+                        backgroundColor: 'rgba(60,141,188,0.9)',
+                        borderColor: 'rgba(60,141,188,0.8)',
+                        pointRadius: false,
+                        pointColor: '#f5003a',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    },
+                    {
+                        label: 'Valores Alcançados Indicador Geral',
+                        backgroundColor: 'rgba(210, 214, 222, 1)',
+                        borderColor: 'rgba(210, 214, 222, 1)',
+                        pointRadius: false,
+                        pointColor: 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    },
+                ]
+            }
+
+            var areaChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display: false,
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display: false,
+                        }
+                    }]
+                }
+            }
+
+            // This will get the first returned node in the jQuery collection.
+            var areaChart = new Chart(areaChartCanvas, {
+                type: 'line',
+                data: areaChartData,
+                options: areaChartOptions
+
+            })
+
+            //-------------
+            //- LINE CHART -
+            //--------------
+            var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+            var lineChartOptions = $.extend(true, {}, areaChartOptions)
+            var lineChartData = $.extend(true, {}, areaChartData)
+            lineChartData.datasets[0].fill = false;
+            lineChartData.datasets[1].fill = false;
+            lineChartOptions.datasetFill = false
+
+            var lineChart = new Chart(lineChartCanvas, {
+                type: 'line',
+                data: lineChartData,
+                options: lineChartOptions
+            })
+
+
+            //-------------
+            //- DONUT CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'Indicador 1 ',
+                    'Indicador 2 ',
+                    'Indicador 3 ',
+                    'Indicador 4 ',
+                    'Indicador 5 ',
+                    'Indicador 6 ',
+                    'Indicador 7 ',
+                    'Indicador Geral ',
+
+                ],
+                datasets: [
+                    {
+                        data: [700, 500, 400, 600, 300, 100, 450, 380],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#f39c75', '#f39b88'],
+                    }
+                ]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var donutChart = new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
+
+            //-------------
+            //- PIE CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+
+            //-------------
+            //- BAR CHART -
+            //-------------
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChartData = $.extend(true, {}, areaChartData)
+            var temp0 = areaChartData.datasets[0]
+            var temp1 = areaChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: true,
+                datasetFill: true
+            }
+
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+
+            //---------------------
+            //- STACKED BAR CHART -
+            //---------------------
+            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+            var stackedBarChartData = $.extend(true, {}, barChartData)
+
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+
+            var stackedBarChart = new Chart(stackedBarChartCanvas, {
+                type: 'bar',
+                data: stackedBarChartData,
+                options: stackedBarChartOptions
+            })
+        })
+    </script>
+
+
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../../dist/js/adminlte.min.js?v=3.2.0"></script>
+
+    <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
+
+    <script src="../../plugins/sparklines/sparkline.js"></script>
+
+    <script src="../../dist/js/demo.js"></script>
+
+    <script>
+        $(function () {
+            /* jQueryKnob */
+
+            $('.knob').knob({
+                /*change : function (value) {
+                 //console.log("change : " + value);
+                 },
+                 release : function (value) {
+                 console.log("release : " + value);
+                 },
+                 cancel : function () {
+                 console.log("cancel : " + this.value);
+                 },*/
+                draw: function () {
+
+                    // "tron" case
+                    if (this.$.data('skin') == 'tron') {
+
+                        var a = this.angle(this.cv)  // Angle
+                            ,
+                            sa = this.startAngle          // Previous start angle
+                            ,
+                            sat = this.startAngle         // Start angle
+                            ,
+                            ea                            // Previous end angle
+                            ,
+                            eat = sat + a                 // End angle
+                            ,
+                            r = true
+
+                        this.g.lineWidth = this.lineWidth
+
+                        this.o.cursor
+                        && (sat = eat - 0.3)
+                        && (eat = eat + 0.3)
+
+                        if (this.o.displayPrevious) {
+                            ea = this.startAngle + this.angle(this.value)
+                            this.o.cursor
+                            && (sa = ea - 0.3)
+                            && (ea = ea + 0.3)
+                            this.g.beginPath()
+                            this.g.strokeStyle = this.previousColor
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false)
+                            this.g.stroke()
+                        }
+
+                        this.g.beginPath()
+                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false)
+                        this.g.stroke()
+
+                        this.g.lineWidth = 2
+                        this.g.beginPath()
+                        this.g.strokeStyle = this.o.fgColor
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false)
+                        this.g.stroke()
+
+                        return false
+                    }
+                }
+            })
+            /* END JQUERY KNOB */
+
+            //INITIALIZE SPARKLINE CHARTS
+            var sparkline1 = new Sparkline($('#sparkline-1')[0], {
+                width: 240,
+                height: 70,
+                lineColor: '#92c1dc',
+                endColor: '#92c1dc'
+            })
+            var sparkline2 = new Sparkline($('#sparkline-2')[0], {
+                width: 240,
+                height: 70,
+                lineColor: '#f56954',
+                endColor: '#f56954'
+            })
+            var sparkline3 = new Sparkline($('#sparkline-3')[0], {
+                width: 240,
+                height: 70,
+                lineColor: '#3af221',
+                endColor: '#3af221'
+            })
+
+            sparkline1.draw([1000, 1200, 920, 927, 931, 1027, 819, 930, 1021])
+            sparkline2.draw([515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921])
+            sparkline3.draw([15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21])
+
+        })
+
+    </script>
+
+    <script>
+        window.onload = function () {
+            window.print();
+        }
+    </script>
+    <div id="torrent-scanner-popup" style="display: none;"></div>
+{% endblock scripts %}
+</body>
+</html>
+

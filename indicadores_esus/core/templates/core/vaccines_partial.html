@@ -1,0 +1,725 @@
+{% load static %}
+
+<style>
+    .alert {
+        width: 40%;
+
+
+    }
+
+    .center {
+        margin: auto;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+    }
+
+    table tr > th,
+    table tr > td {
+        padding: 10px;
+        border: #bbb 1px solid;
+    }
+
+    tr > td:first-child {
+        white-space: nowrap;
+    }
+</style>
+
+
+
+{% block pageName %}
+
+{% endblock pageName %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/toastr/toastr.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <div class="col-md-12">
+
+        {% include 'core/Filter_vaccines_Partial.html' %}
+
+    </div>
+
+    <div class="row mt-4 d-flex justify-content-center">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-4">
+            <div style="text-align:center" class="position-relative p-3 bg-gradient-white" style="width: 180px">
+
+                <div class="card-outline-tabs">
+                    <div class="ribbon bg-gradient-dark text-lg">
+                        <i class="fas fa-syringe"></i> Indicador 5 </i>
+                    </div>
+                </div>
+                <br>
+                <h5> Proporção de crianças de 1 (um) ano de idade vacinadas na APS
+                    <h5><br>
+                        <h5><strong>  {{ summary.ind_2 }} de {{ summary.total }} alcançados <i
+                                class="fa fa-bar-chart"></i>
+                            - {{ summary.ind_2_percent }}%</h5><br></strong></h5>
+            </div>
+        </div>
+        <div class="col-sm-4">
+
+
+        </div>
+
+
+    </div>  <br>
+
+    <section class="test-2">
+        <section class="content" id="pregnant_section">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                <tr>
+
+                    <th class="text-dark"><i class="fa fa-user" aria-hidden="true"></i> Nome</th>
+                    <th class="text-dark"><i class="fa fa-calendar-day" aria-hidden="true"></i> Idade</th>
+
+
+                    <th class="text-dark"><i class="fa fa-building" aria-hidden="true"></i> Unidade vinculada</th>
+                    <th class="text-dark"><i class="fa fa-users" aria-hidden="true"></i> Equipe Associada</th>
+                    <th class="text-dark"><i class="fa fa-user-edit" aria-hidden="true"></i> Cadastro Individual</th>
+
+
+                    <th class="text-dark"><i class="fas fa-syringe" aria-hidden="true"></i> Indicador 5</th>
+
+                    <th class="text-primary"><i class="fa fa-search-plus" aria-hidden="true"></i> Visualizar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <div class="container" id="box">
+                    <div class="row well">
+
+
+                        <tr>
+
+                            <td>
+
+
+                                DARLENE ALVES BORGES SANTOS
+                            </td>
+
+                            <td>
+
+                                30 Anos
+
+                            </td>
+                            <td>
+                                Ubs Vila Sao Jose
+                            </td>
+                            <td>
+                                Raquel Dos Santos Lima
+                                {#                        {% if pregnant.patient.person.cpf %}{{ pregnant.patient.person.cpf }}{% else %}-{% endif %}#}
+                            </td>
+                            <td>
+                                Indicador Alcançado
+
+                                {#                       Equipe Teste {% if pregnant.dum %}{{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            <td class="text-dark">
+                                <strong>3</strong><br>
+
+                                <div class="badge badge-success text-white">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                    Alcançado
+                                </div>
+                                {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"
+                                        {# data-target="#myModal"
+                                        hx-target="#myModal">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_unit %}{{ pregnant.patient.health_unit }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_team %}#}
+                            {#                            <div class="badge badge-dark text-white">#}
+                            {#                                <i class="fa fa-check-circle" aria-hidden="true"></i>#}
+                            {#                                {{ pregnant.patient.health_team }}#}
+                            {#                            </div>#}
+                            {#                        {% else %}#}
+                            {#                            -#}
+                            {#                        {% endif %}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                    <td class="text-success">#}
+                            {#                        <strong>{{ pregnant.dental_appointments }}</strong>#}
+                            {#                    </td>#}
+                            {##}
+                            {##}
+                            {#                    <td class="text-danger">#}
+                            {#                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"#}
+                            {#                                data-target="#myModal" hx-get="{% url 'core:pregnant_detail' pregnant.pk %}" hx-target="#myModal">#}
+                            {#                            <i class="fa fa-search"></i>#}
+                            {#                        </button>#}
+                            {#                    </td>#}
+                            {#                </tr>#}
+
+
+                            {##}
+                            {#            {% for pregnant in page_obj %}#}
+                            {#                <tr>#}
+                            {##}
+                            {#                    <td>#}
+                            {##}
+                            {##}
+                            {#                        {{ pregnant.patient.person.name }}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                       <td>#}
+                            {##}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.person.cns %}{{ pregnant.patient.person.cns }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.person.cpf %}{{ pregnant.patient.person.cpf }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.dum %}{{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_unit %}{{ pregnant.patient.health_unit }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_team %}#}
+                            {#                            <div class="badge badge-dark text-white">#}
+                            {#                                <i class="fa fa-check-circle" aria-hidden="true"></i>#}
+                            {#                                {{ pregnant.patient.health_team }}#}
+                            {#                            </div>#}
+                            {#                        {% else %}#}
+                            {#                            -#}
+                            {#                        {% endif %}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                    <td class="text-success">#}
+                            {#                        <strong>{{ pregnant.dental_appointments }}</strong>#}
+                            {#                    </td>#}
+                            {##}
+                            {##}
+                            {#                    <td class="text-danger">#}
+                            {#                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"#}
+                            {#                                data-target="#myModal" hx-get="{% url 'core:pregnant_detail' pregnant.pk %}" hx-target="#myModal">#}
+                            {#                            <i class="fa fa-search"></i>#}
+                            {#                        </button>#}
+                            {#                    </td>#}
+                            {#                </tr>#}
+                            {#            {% endfor %}#}
+                    </div>
+                </div>
+                <div class="container" id="box">
+                    <div class="row well">
+
+
+                        <tr>
+
+                            <td>
+
+
+                                CAMILLA DE SOUSA SILVA
+                            </td>
+
+                            <td>
+
+                                21 Anos
+
+                            </td>
+                            <td>
+                                Ubs Vila Sao Jose
+                            </td>
+                            <td>
+                                Raquel Dos Santos Lima
+                                {#                        {% if pregnant.patient.person.cpf %}{{ pregnant.patient.person.cpf }}{% else %}-{% endif %}#}
+                            </td>
+                            <td>
+                                Indicador Não Alcançado
+
+                                {#                       Equipe Teste {% if pregnant.dum %}{{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            <td class="text-dark">
+                                <strong>3</strong><br>
+
+                                <div class="badge badge-success text-white">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                    Alcançado
+                                </div>
+                                {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"
+                                        {# data-target="#myModal"
+                                        hx-target="#myModal">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_unit %}{{ pregnant.patient.health_unit }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_team %}#}
+                            {#                            <div class="badge badge-dark text-white">#}
+                            {#                                <i class="fa fa-check-circle" aria-hidden="true"></i>#}
+                            {#                                {{ pregnant.patient.health_team }}#}
+                            {#                            </div>#}
+                            {#                        {% else %}#}
+                            {#                            -#}
+                            {#                        {% endif %}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                    <td class="text-success">#}
+                            {#                        <strong>{{ pregnant.dental_appointments }}</strong>#}
+                            {#                    </td>#}
+                            {##}
+                            {##}
+                            {#                    <td class="text-danger">#}
+                            {#                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"#}
+                            {#                                data-target="#myModal" hx-get="{% url 'core:pregnant_detail' pregnant.pk %}" hx-target="#myModal">#}
+                            {#                            <i class="fa fa-search"></i>#}
+                            {#                        </button>#}
+                            {#                    </td>#}
+                            {#                </tr>#}
+
+
+                            {##}
+                            {#            {% for pregnant in page_obj %}#}
+                            {#                <tr>#}
+                            {##}
+                            {#                    <td>#}
+                            {##}
+                            {##}
+                            {#                        {{ pregnant.patient.person.name }}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                       <td>#}
+                            {##}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.person.cns %}{{ pregnant.patient.person.cns }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.person.cpf %}{{ pregnant.patient.person.cpf }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.dum %}{{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_unit %}{{ pregnant.patient.health_unit }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_team %}#}
+                            {#                            <div class="badge badge-dark text-white">#}
+                            {#                                <i class="fa fa-check-circle" aria-hidden="true"></i>#}
+                            {#                                {{ pregnant.patient.health_team }}#}
+                            {#                            </div>#}
+                            {#                        {% else %}#}
+                            {#                            -#}
+                            {#                        {% endif %}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                    <td class="text-success">#}
+                            {#                        <strong>{{ pregnant.dental_appointments }}</strong>#}
+                            {#                    </td>#}
+                            {##}
+                            {##}
+                            {#                    <td class="text-danger">#}
+                            {#                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"#}
+                            {#                                data-target="#myModal" hx-get="{% url 'core:pregnant_detail' pregnant.pk %}" hx-target="#myModal">#}
+                            {#                            <i class="fa fa-search"></i>#}
+                            {#                        </button>#}
+                            {#                    </td>#}
+                            {#                </tr>#}
+                            {#            {% endfor %}#}
+                    </div>
+                </div>
+                <div class="container" id="box">
+                    <div class="row well">
+
+
+                        <tr>
+
+                            <td>
+
+
+                                Joyce Ribeiro dos Reis
+                            </td>
+
+                            <td>
+
+                                18 Anos
+
+                            </td>
+                            <td>
+                                Ubs Centro
+                            </td>
+                            <td>
+                                Andressa Maria Bento
+                                {#                        {% if pregnant.patient.person.cpf %}{{ pregnant.patient.person.cpf }}{% else %}-{% endif %}#}
+                            </td>
+                            <td>
+                                Não possui cadastro individual.
+
+                                {#                       Equipe Teste {% if pregnant.dum %}{{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            <td class="text-dark">
+                                <strong>3</strong><br>
+
+                                <div class="badge badge-success text-white">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                    Alcançado
+                                </div>
+                                {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"
+                                        {# data-target="#myModal"
+                                        hx-target="#myModal">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_unit %}{{ pregnant.patient.health_unit }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_team %}#}
+                            {#                            <div class="badge badge-dark text-white">#}
+                            {#                                <i class="fa fa-check-circle" aria-hidden="true"></i>#}
+                            {#                                {{ pregnant.patient.health_team }}#}
+                            {#                            </div>#}
+                            {#                        {% else %}#}
+                            {#                            -#}
+                            {#                        {% endif %}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                    <td class="text-success">#}
+                            {#                        <strong>{{ pregnant.dental_appointments }}</strong>#}
+                            {#                    </td>#}
+                            {##}
+                            {##}
+                            {#                    <td class="text-danger">#}
+                            {#                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"#}
+                            {#                                data-target="#myModal" hx-get="{% url 'core:pregnant_detail' pregnant.pk %}" hx-target="#myModal">#}
+                            {#                            <i class="fa fa-search"></i>#}
+                            {#                        </button>#}
+                            {#                    </td>#}
+                            {#                </tr>#}
+
+
+                            {##}
+                            {#            {% for pregnant in page_obj %}#}
+                            {#                <tr>#}
+                            {##}
+                            {#                    <td>#}
+                            {##}
+                            {##}
+                            {#                        {{ pregnant.patient.person.name }}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                       <td>#}
+                            {##}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.person.cns %}{{ pregnant.patient.person.cns }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.person.cpf %}{{ pregnant.patient.person.cpf }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.dum %}{{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_unit %}{{ pregnant.patient.health_unit }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_team %}#}
+                            {#                            <div class="badge badge-dark text-white">#}
+                            {#                                <i class="fa fa-check-circle" aria-hidden="true"></i>#}
+                            {#                                {{ pregnant.patient.health_team }}#}
+                            {#                            </div>#}
+                            {#                        {% else %}#}
+                            {#                            -#}
+                            {#                        {% endif %}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                    <td class="text-success">#}
+                            {#                        <strong>{{ pregnant.dental_appointments }}</strong>#}
+                            {#                    </td>#}
+                            {##}
+                            {##}
+                            {#                    <td class="text-danger">#}
+                            {#                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"#}
+                            {#                                data-target="#myModal" hx-get="{% url 'core:pregnant_detail' pregnant.pk %}" hx-target="#myModal">#}
+                            {#                            <i class="fa fa-search"></i>#}
+                            {#                        </button>#}
+                            {#                    </td>#}
+                            {#                </tr>#}
+                            {#            {% endfor %}#}
+                    </div>
+                </div>
+                <div class="container" id="box">
+                    <div class="row well">
+
+
+                        <tr>
+
+                            <td>
+
+
+                                FRANCISCA IANCA SANTOS
+                            </td>
+
+                            <td>
+
+                                20 Anos
+
+                            </td>
+                            <td>
+                                Ubs Vila Sao Francisco
+                            </td>
+                            <td>
+                                Bianca Sousa Dos Santos Lima
+                                {#                        {% if pregnant.patient.person.cpf %}{{ pregnant.patient.person.cpf }}{% else %}-{% endif %}#}
+                            </td>
+                            <td>
+                                Não possui equipe vinculada.
+
+
+                                {#                       Equipe Teste {% if pregnant.dum %}{{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            <td class="text-dark">
+                                <strong>3</strong><br>
+
+                                <div class="badge badge-success text-white">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                    Alcançado
+                                </div>
+                                {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"
+                                        {# data-target="#myModal"
+                                        hx-target="#myModal">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            </td>
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_unit %}{{ pregnant.patient.health_unit }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_team %}#}
+                            {#                            <div class="badge badge-dark text-white">#}
+                            {#                                <i class="fa fa-check-circle" aria-hidden="true"></i>#}
+                            {#                                {{ pregnant.patient.health_team }}#}
+                            {#                            </div>#}
+                            {#                        {% else %}#}
+                            {#                            -#}
+                            {#                        {% endif %}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                    <td class="text-success">#}
+                            {#                        <strong>{{ pregnant.dental_appointments }}</strong>#}
+                            {#                    </td>#}
+                            {##}
+                            {##}
+                            {#                    <td class="text-danger">#}
+                            {#                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"#}
+                            {#                                data-target="#myModal" hx-get="{% url 'core:pregnant_detail' pregnant.pk %}" hx-target="#myModal">#}
+                            {#                            <i class="fa fa-search"></i>#}
+                            {#                        </button>#}
+                            {#                    </td>#}
+                            {#                </tr>#}
+
+
+                            {##}
+                            {#            {% for pregnant in page_obj %}#}
+                            {#                <tr>#}
+                            {##}
+                            {#                    <td>#}
+                            {##}
+                            {##}
+                            {#                        {{ pregnant.patient.person.name }}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                       <td>#}
+                            {##}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.person.cns %}{{ pregnant.patient.person.cns }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.person.cpf %}{{ pregnant.patient.person.cpf }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.dum %}{{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.dpp %}{{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_unit %}{{ pregnant.patient.health_unit }}{% else %}-{% endif %}#}
+                            {#                    </td>#}
+                            {#                    <td>#}
+                            {#                        {% if pregnant.patient.health_team %}#}
+                            {#                            <div class="badge badge-dark text-white">#}
+                            {#                                <i class="fa fa-check-circle" aria-hidden="true"></i>#}
+                            {#                                {{ pregnant.patient.health_team }}#}
+                            {#                            </div>#}
+                            {#                        {% else %}#}
+                            {#                            -#}
+                            {#                        {% endif %}#}
+                            {#                    </td>#}
+                            {##}
+                            {#                    <td class="text-success">#}
+                            {#                        <strong>{{ pregnant.dental_appointments }}</strong>#}
+                            {#                    </td>#}
+                            {##}
+                            {##}
+                            {#                    <td class="text-danger">#}
+                            {#                        <button type="button" class="btn btn-primary btn-group-vertical" data-toggle="modal"#}
+                            {#                                data-target="#myModal" hx-get="{% url 'core:pregnant_detail' pregnant.pk %}" hx-target="#myModal">#}
+                            {#                            <i class="fa fa-search"></i>#}
+                            {#                        </button>#}
+                            {#                    </td>#}
+                            {#                </tr>#}
+                            {#            {% endfor %}#}
+                    </div>
+                </div>
+                </tbody>
+            </table>
+            <div class="modal fade" id="myModal" role="dialog">
+                {% include 'core/vaccines_modal_partial.html' %}
+            </div>
+        </section></section>
+
+        <!-- Modal -->
+
+
+        <script>
+            function myFunction() {
+                window.print();
+            };
+        </script>
+
+
+        <script>
+            function closeModal() {
+                var container = document.getElementById("modals-here")
+                var backdrop = document.getElementById("modal-backdrop")
+                var modal = document.getElementById("modal")
+
+                modal.classList.remove("show")
+                backdrop.classList.remove("show")
+
+                setTimeout(function () {
+                    container.removeChild(backdrop)
+                    container.removeChild(modal)
+                }, 200)
+            }
+        </script>
+        <script src="exportToExcel.js" defer></script>
+
+        <style>
+            td {
+                text-align: center; /* alinhamento horizontal */
+                vertical-align: middle; /* alinhamento vertical */
+            }
+
+            th {
+                text-align: center; /* alinhamento horizontal */
+                vertical-align: middle; /* alinhamento vertical */
+            }
+        </style>
+        {% include 'core/footer_paginator.html' %}
+    </section>
+    </section>
+    <!-- /.content -->
+{% endblock content %}
+
+{% block scripts %}
+    <script src="https://unpkg.com/htmx.org@1.7.0"
+            integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"
+            defer>
+    </script>
+{% endblock scripts %}
+
+<script src="{% static 'core/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+<script src="{% static 'core/plugins/toastr/toastr.min.js' %}"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            "searching": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        {% if messages %}
+
+            $(function () {
+                Toast.fire({
+                    icon: 'success',
+                    {% for message in messages %}
+                        title: '{{ message }}',
+                    {% endfor %}
+                })
+            });
+        {% endif %}
+
+    });
+
+    const button = document.querySelector('button');
+    button.addEventListener('click', () => {
+        const content = document.querySelector('.test-2');
+        let WinPrint = window.open('', '', 'left=0,top=0,width=500,height=300,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(content.innerHTML);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+    });
+
+
+</script>

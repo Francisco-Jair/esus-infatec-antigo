@@ -1,0 +1,180 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+
+
+{% block title %}Painel de Controle{% endblock title %}
+{% block pageName %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <medium><strong>Manutenção de Usuários</strong> </medium>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+{% endblock pageName %}
+<h2>
+    Dashboard <small>Acesso Restrito</small>
+</h2>
+{% block css %}
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/toastr/toastr.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-red">
+                        <div class="inner">
+                            <h3>_</h3>
+
+
+                            <p>Adiconar Usuário</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                        </div>
+                        <a href="/admin/auth/user/add/" target="_blank" rel="noopener noreferrer"
+                           class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-indigo">
+                        <div class="inner">
+                            <h3>_</h3>
+
+                            <p>Listar Usuários</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-search"></i>
+                        </div>
+
+                        <a href="/admin/auth/user/ " target="_blank" rel="noopener noreferrer"
+                           class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-success">
+                        <div class="inner">
+                            <h3>_</h3>
+
+                            <p>Adicionar Grupo de Usuários</p>
+                        </div>
+                        <div class="icon">
+
+                            <i class="fa fa-house-user"></i>
+                        </div>
+                        <a href="/admin/auth/group/add/" target="_blank" rel="noopener noreferrer"
+                           class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info ">
+                        <div class="inner">
+                            <h3>_</h3>
+
+                            <p>Listar Grupos</p>
+                        </div>
+                        <div class="icon">
+                            <i class='fas fa-search-minus'></i>
+                        </div>
+                        <a href="/admin/auth/group/" target="_blank" rel="noopener noreferrer" class="small-box-footer">More
+                            info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <div class="bar bar-success" style="width: 35%;"></div>
+            <div class="bar bar-warning" style="width: 20%;"></div>
+            <div class="bar bar-danger" style="width: 10%;"></div>
+        </div>
+        <div class="progress">
+            <div class="bar bar-success" style="width: 35%;"></div>
+            <div class="bar bar-warning" style="width: 20%;"></div>
+            <div class="bar bar-danger" style="width: 10%;"></div>
+        </div>
+        <div class="progress">
+            <div class="bar bar-success" style="width: 35%;"></div>
+            <div class="bar bar-warning" style="width: 20%;"></div>
+            <div class="bar bar-danger" style="width: 10%;"></div>
+        </div>
+
+        </div>
+        </div>
+
+        </div>
+        </div>
+        <!-- /.row -->
+        </div>
+
+
+        <!-- /.col -->
+        </div>
+
+    </section>
+    <!-- /.content -->
+{% endblock content %}
+
+<script src="{% static 'core/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+<script src="{% static 'core/plugins/toastr/toastr.min.js' %}"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        {% if messages %}
+
+            $(function () {
+                Toast.fire({
+                    icon: 'success',
+                    {% for message in messages %}
+                        title: '{{ message }}',
+                    {% endfor %}
+                })
+            });
+        {% endif %}
+
+    });
+
+</script>
+
+
+
+

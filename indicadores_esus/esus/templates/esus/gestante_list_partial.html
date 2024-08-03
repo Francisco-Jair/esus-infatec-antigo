@@ -1,0 +1,65 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Município</th>
+            <th>Sexo</th>
+            <th>DUM</th>
+            <th>Data</th>
+            <th>CIDs</th>
+            <th>CIAPs</th>
+            <th>CNS</th>
+            <th>CPF</th>
+            <th>CBO 1</th>
+            <th>CBO 2</th>
+            <th>PEC</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in page_obj %}
+        <tr>
+            <td>
+                {{ item.co_seq_fat_atd_ind }}
+            </td>
+            <td>
+                {{ item.co_dim_municipio }}
+            </td>
+            <td>
+                {{ item.co_dim_sexo }}
+            </td>
+            <td>
+                {{ item.co_dim_tempo_dum }}
+            </td>
+            <td>
+                {{ item.dt_inicial_atendimento|date:'SHORT_DATE_FORMAT' }}
+            </td>
+            <td>
+                {{ item.ds_filtro_cids }}
+            </td>
+            <td>
+                {{ item.ds_filtro_ciaps }}
+            </td>
+            <td>
+                {{ item.nu_cns }}
+            </td>
+            <td>
+                {{ item.nu_cpf_cidadao }}
+            </td>
+            <td>
+                {{ item.co_dim_cbo_1 }}
+            </td>
+            <td>
+                {{ item.co_dim_cbo_2 }}
+            </td>
+            <td>
+                {{ item.co_fat_cidadao_pec.co_seq_fat_cidadao_pec }}
+            </td>
+            <td>
+                {{ item.nu_prontuario }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'footer_paginator.html' %}
+

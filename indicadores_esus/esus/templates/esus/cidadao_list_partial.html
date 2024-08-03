@@ -1,0 +1,27 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Localidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for citizen in page_obj %}
+        <tr>
+            <td>
+                {{ citizen.co_seq_cidadao }}
+            </td>
+            <td>
+                {{ citizen.no_cidadao }}
+            </td>
+            <td>
+                {{ citizen.co_localidade }}
+            </td>
+
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'footer_paginator.html' %}

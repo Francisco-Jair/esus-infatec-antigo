@@ -1,0 +1,1733 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+<style>
+    .alert {
+        width: 40%;
+    }
+</style>
+
+
+
+
+{% block title %}Painel de Controle{% endblock title %}
+{% block pageName %}
+
+{% endblock pageName %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/toastr/toastr.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                <i class="fa fa-baby-carriage"></i>
+                                <div class="badge alert-dark"> Gestantes com pelo menos 6 consultas pré-natal feitas
+                                </div>
+                            </h4>
+                        </div>
+
+                        <div class="card-body">
+                            <ul class="todo-list ui-sortable" data-widget="todo-list">
+                                <li>
+
+
+                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                    <label for="todoCheck1"></label>
+
+
+                                    <span class="text">Numero de Gestantes</span>
+
+                                    <h1 class="badge badge-secondary"><i class="fa fa-arrow-right"></i> 150</h1>
+
+
+                                </li>
+                                <li>
+
+
+                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                    <label for="todoCheck1"></label>
+
+
+                                    <span class="text">No Quadrimestre</span>
+
+                                    <large class="badge badge-primary"><i class="fa fa-arrow-right"></i> 110</large>
+
+
+                                </li>
+                                <li>
+
+
+                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                    <label for="todoCheck1"></label>
+
+
+                                    <span class="text">Necessita de uma Atenção especial</span>
+
+                                    <large class="badge badge-dark"><i class="fa fa-arrow-right"></i> 10</large>
+
+
+                                </li>
+                                <li>
+
+
+                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                    <label for="todoCheck1"></label>
+
+
+                                    <span class="text">Pendentes</span>
+
+                                    <large class="badge badge-danger"><i class="fa fa-arrow-right"></i> 40</large>
+
+
+                                </li>
+                                <li>
+
+
+                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                    <label for="todoCheck1"></label>
+
+
+                                    <span class="text">Aceito</span>
+
+                                    <large class="badge badge-success"><i class="fa fa-arrow-right"></i> 15</large>
+
+
+                                </li>
+                                <li>
+
+
+                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                    <label for="todoCheck1"></label>
+
+
+                                    <span class="text">Sem Consulta no Mês </span>
+
+                                    <large class="badge badge-info"><i class="fa fa-arrow-right"></i> 32</large>
+
+
+                                </li>
+
+
+                            </ul>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-check-square"></i>
+                                <div class="badge alert-dark"> Selecione um filtro para a operacionalização</div>
+                            </h3>
+                        </div>
+
+                        <div class="card-body clearfix">
+                            <strong class="text-right">Filtro</strong>
+
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                    data-select2-id="17" tabindex="-1" aria-hidden="true">
+                                <optiondata-select2-id
+                                ="19">Alabama</option>
+                                <option data-select2-id="94">Numero de Gestantes</option>
+                                <option data-select2-id="95">No Quadrimestre</option>
+                                <option data-select2-id="96">Necessita de uma Atenção especial</option>
+                                <option data-select2-id="97">Pendentes</option>
+                                <option data-select2-id="98">Aceito</option>
+                                <option data-select2-id="99">Sem Consulta no Mês</option>
+                                <option selected="selected" data-select2-id="100">Todos</option>
+                            </select>
+                            <strong>Equipe</strong>
+
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                    data-select2-id="17" tabindex="-1" aria-hidden="true">
+                                <optiondata-select2-id
+                                ="19">Alabama</option>
+                                <option data-select2-id="94">UBS BAU</option>
+
+                                <option data-select2-id="94">UBS CABECEIRA DOS CAVALOS 2464497 - M</option>
+                                <option data-select2-id="94">UBS CALDEIROES 2453991 - M</option>
+                                <option data-select2-id="94">UBS CAMPO DE BELEM 2453940 - M</option>
+                                <option data-select2-id="94">UBS CAMPO DE BELEM II 7926871 - M</option>
+                                <option data-select2-id="94">UBS CANGALHEIRO 2454025 - M</option>
+                                <option data-select2-id="94">UBS CASTELO BRANCO 2453800 - M</option>
+                                <option data-select2-id="94">UBS CENTRO 2454041 - M</option>
+                                <option data-select2-id="94">UBS CHAPADA 2453762 - M</option>
+                                <option data-select2-id="94">UBS COHAB 3694739 - M</option>
+                                <option data-select2-id="94">UBS COHAB II 7926928 - M</option>
+                                <option data-select2-id="94">UBS CRISTINO CRUZ 2453754 - M</option>
+                                <option data-select2-id="94">UBS DR JOSE DASSUNCAO BRANDAO BREJINHO 2453770 - M</option>
+                                <option data-select2-id="94">UBS EUGENIO COUTINHO 7926863 - M</option>
+                                <option data-select2-id="94">UBS FAZENDINHA 5378818 - M</option>
+                                <option data-select2-id="94">UBS ITAPECURUZINHO 2453975 - M</option>
+                                <option data-select2-id="94">UBS LUIZA QUEIROZ 9004580 - M</option>
+                                <option data-select2-id="94">UBS MUTIRAO 2453894 - M</option>
+                                <option data-select2-id="94">UBS NAZARE DO BRUNO 2453738 - M</option>
+                                <option data-select2-id="94">UBS NOVA CAXIAS 2453878 - M</option>
+                                <option data-select2-id="94">UBS PAMPULHA 3179761 - M</option>
+                                <option data-select2-id="94">UBS PIQUIZEIRO 2453797 - M</option>
+                                <option data-select2-id="94">UBS PIRAJA 6304761 - M</option>
+                                <option data-select2-id="94">UBS PONTE 2453843 - M</option>
+                                <option data-select2-id="94">UBS POVOADO CAXIRIMBU 5616794 - M</option>
+                                <option data-select2-id="94">UBS POVOADO SANTO ANTONIO 5616786 - M</option>
+                                <option data-select2-id="94">UBS RODAGEM 2453711 - M</option>
+                                <option data-select2-id="94">UBS SALOBRO 2454017 - M</option>
+                                <option data-select2-id="94">UBS SANTA RITA 6466060 - M</option>
+                                <option data-select2-id="94">UBS SAO FRANCISCO 2453983 - M</option>
+                                <option data-select2-id="94">UBS TREZIDELA 2453886 - M</option>
+                                <option data-select2-id="94">UBS VILA ALECRIM 7754833 - M</option>
+                                <option data-select2-id="94">UBS VILA ARIAS 5616778 - M</option>
+                                <option data-select2-id="94">UBS VILA SAO JOSE 7926855 - M</option>
+                                <option data-select2-id="94">UBS VOLTA REDONDA 2453959 - M</option>
+                                <option data-select2-id="94">UEMA 9086455 06352421000168 M</option>
+                                <option data-select2-id="94">UNIDADE BASICA DE SAUDE DA VILA PARAISO 0101818 - M
+                                </option>
+                                <option data-select2-id="94">UNIDADE DE CAXIAS 0818070 10999381001947 M</option>
+                                <option data-select2-id="94">UNIDADE DE PRONTO ATENDIMENTO UPA 9037780 - M</option>
+                                <option data-select2-id="94">UNIDADE DE TRATAMENTO FORA DO DOMICILIO TFD 2813785 - M
+                                </option>
+                                <option data-select2-id="94">UNIDADE DE VIGILANCIA SANITARIA 2454009 - M</option>
+                                <option data-select2-id="94">UNIOFT 6167500 03542824000181 M</option>
+                                <option data-select2-id="94">USA 01 SAMU 192 3696731 - M</option>
+                                <option data-select2-id="94">USA 02 SAMU 192 7603924 - M</option>
+                                <option data-select2-id="94">USB 01 SAMU 192 6944922 - M</option>
+                                <option data-select2-id="94">USB 02 SAMU 192 6944930 - M</option>
+                                <option data-select2-id="94">USB 03 SAMU 192 7529643 - M</option>
+                                <option data-select2-id="94">USB 04 SAMU 192 7529651 - M</option>
+                                <option data-select2-id="94">USB 05 SAMU 192</option>
+                                <option selected="selected" data-select2-id="100">Todos</option>
+                            </select>
+                            <div class="input-group input-group-sm">
+                                <input type="text" placeholder="Unidade (digite o CNES ou 0 para SEM UNIDADE)"
+                                       class="form-control">
+                                <span class="input-group-append">
+<button type="button" class="btn btn-primary btn-flat">Ir!</button>
+</span>
+                            </div>
+                            <br>
+                            <div class="input-group input-group-sm">
+                                <input type="text" placeholder="Busca por CPF da Gestante"
+                                       class="form-control">
+                                <span class="input-group-append">
+<button type="button" class="btn btn-primary btn-flat">Ir!</button>
+</span>
+                            </div>
+                            <br>
+
+                            <div class="input-group input-group-sm">
+                                <input type="text" placeholder="Busca por nome da Gestante" class="form-control">
+                                <span class="input-group-append">
+<button type="button" class="btn btn-primary btn-flat">Ir!</button>
+</span>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        {#                        <div class="card-header">#}
+                        {#                            <h3 class="card-title">Informações das Cores:#}
+                        {##}
+                        {#                            </h3>#}
+                        {#                            <large class="badge badge-danger"> Por fazer</large>#}
+                        {##}
+                        {#                            <large class="badge badge-info">Sem Consulta no Mês#}
+                        {#                            </large>#}
+                        {#                            <large class="badge badge-success"> Aceito</large>#}
+                        {#                            <large class="badge badge-dark"> Necessita de uma Atenção especial</large>#}
+                        {#                            <large class="badge badge-secondary">Quantidade de Gestantes</large>#}
+                        {#                            <large class="badge badge-primary">No Quadrimestre</large>#}
+                        {##}
+                        {##}
+                        {#                        </div>#}
+
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">CNS</th>
+                                <th scope="col">CPF</th>
+                                <th scope="col">RG</th>
+                                <th scope="col">DUM</th>
+                                <th scope="col">DPP</th>
+                                <th scope="col">Dt Nascimento</th>
+                                <th scope="col">CNES</th>
+                                <th scope="col">INE</th>
+                                <th scope="col">MA</th>
+                                <th scope="col">CNS</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+
+                                <td>1</td>
+                                <td>
+                                    'Maria Aldenice Costa Carneiro
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Aaine Samya Da Silva Ribeiro
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Aaron Paiva Silva De Azevedo
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abdias Craveiro Da Silva
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abdias Da Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abdomary De Castro Sousa
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abgail Cristina Sousa Lima
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abidian Gomes Da Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abidoral Mendes Dos Santos
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abigail Dos Santos Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abilemar Alves Pinheiro
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abilio Alves Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abilio De Brito Marques
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abimael Ferreira De Andrade
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abmael Alves Do Evangelho
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abmael Levy De Souza Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abmael Pereira Do Nascimento
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abner Araújo Da Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abner Levi Miranda Leão
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abraao Viana Maia Alves
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abran William Conceição Sousa
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abranh Lohan Da Silva Mesquita
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Abraão Silva Da Costa
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acalias De Paula Cunha
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acassia Tatiane De Sousa Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acelina Pereira Melo
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acelina Rocha Da Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acelino Da Costa
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acelino Matias Da Conceição
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acelino Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acenete Alves Da Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acilon Belo
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acioneide Sá Coutinho Trindade
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acir De Maria Belleza
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acrizio Ferreira Da Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acrychyld Carla Alves Lima Costa
+                                </td>
+                                <td>
+                                    700004418771608
+                                </td>
+                                <td>
+                                    60812903366
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acrísio Ramos Atan
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acsa Eloa Medeiros Da Silva
+                                </td>
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Acsa Lais Lima Almeida
+                                </td>
+                                <td>
+                                    898000978775416
+                                <td>
+                                    898002935294426
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    01/02/2022
+                                </td>
+                                <td>898002935294426</td>
+
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+                                <td>
+                                    None
+                                </td>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- /.col -->
+
+    </section>
+    <!-- /.content -->
+{% endblock content %}
+
+<script src="{% static 'core/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+<script src="{% static 'core/plugins/toastr/toastr.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        {% if messages %}
+
+            $(function () {
+                Toast.fire({
+                    icon: 'success',
+                    {% for message in messages %}
+                        title: '{{ message }}',
+                    {% endfor %}
+                })
+            });
+        {% endif %}
+
+    });
+
+</script>
+
+
+
+

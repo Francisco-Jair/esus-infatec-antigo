@@ -1,0 +1,33 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Município</th>
+            <th>Data</th>
+            <th>CIDs</th>
+            <th>CIAPs</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in page_obj %}
+        <tr>
+            <td>
+                {{ item.co_seq_fat_atd_ind }}
+            </td>
+            <td>
+                {{ item.co_dim_municipio }}
+            </td>
+            <td>
+                {{ item.dt_inicial_atendimento }}
+            </td>
+            <td>
+                {{ item.ds_filtro_cids }}
+            </td>
+            <td>
+                {{ item.ds_filtro_ciaps }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'footer_paginator.html' %}

@@ -1,0 +1,504 @@
+{% load static %}
+
+{% load bootstrap4 %}
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <style>
+        /*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+        .progress {
+            width: 150px;
+            height: 150px;
+            background: none;
+            position: relative;
+        }
+
+        .progress::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid #eee;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .progress > span {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
+
+        .progress .progress-left {
+            left: 0;
+        }
+
+        .progress .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border-width: 6px;
+            border-style: solid;
+            position: absolute;
+            top: 0;
+        }
+
+        .progress .progress-left .progress-bar {
+            left: 100%;
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border-left: 0;
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+        }
+
+        .progress .progress-right {
+            right: 0;
+        }
+
+        .progress .progress-right .progress-bar {
+            left: -100%;
+            border-top-left-radius: 80px;
+            border-bottom-left-radius: 80px;
+            border-right: 0;
+            -webkit-transform-origin: center right;
+            transform-origin: center right;
+        }
+
+        .progress .progress-value {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+
+        .rounded-lg {
+            border-radius: 1rem;
+        }
+
+        .text-gray {
+            color: #aaa;
+        }
+
+        div.h4 {
+            line-height: 1rem;
+        }
+
+        }
+
+        table tr > th,
+        table tr > td {
+            padding: 10px;
+            border: #bbb 1px solid;
+        }
+
+        tr > td:first-child {
+            white-space: nowrap;
+        }
+
+        @media print {
+            .pagebreak {
+                clear: both;
+                page-break-after: always;
+            }
+        }
+
+    </style>
+
+
+    <title>{% block title %}Impressão {% endblock title %}</title>
+
+    <!-- Font Awesome Icons -->
+    <script src="{% static 'core/plugins/jquery/jquery.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'core/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet"
+          href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet"
+          href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+          href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/summernote/summernote-bs4.min.css">
+
+    <style type="text/css">/* Chart.js */
+
+    .card {
+        box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);
+        padding: 24px;
+    }
+
+
+    </style>
+</head>
+<!-- Theme style -->
+<link rel="stylesheet" href="{% static 'core/dist/css/adminlte.min.css' %}">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{% block css %}
+{% endblock css %}
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+
+<section>
+
+<div class="row-cols-md-12">
+    <div class="modal-content">
+        <div class="modal-dialog-scrollable">
+            <h4 class="modal-xl left">
+                <i class="fas fa-heartbeat" aria-hidden="true"> <strong> {{ obj.patient.person.name }} </strong> </i>
+                <button type="button" class="close text-danger" data-dismiss="modal" aria-label=" "><span
+                        aria-hidden="true"> <strong> <h6> </h6> </strong>  </span></button>
+            </h4>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="margin-bottom: 0px">
+                        <b>Indicador 6</b><br>
+                        Proporção de pessoas com hipertensão, com consulta e pressão arterial aferida no semestre
+                    </p>
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+                    <span id="label-indicador_4">
+                        {% if obj.sixth_indicator_achieved %}
+                            <span class="badge badge-success text-white"> Alcançado <i class="fa fa-close"></i></span>
+                        {% else %}
+                            <span class="badge badge-danger text-white"> Não Alcançado <i class="fa fa-close"></i></span>
+                        {% endif %}
+                    </span>
+                    <hr style="margin-top: 10px; margin-bottom: 10px">
+                    {% for msg in obj.indicator_6_msgs %}
+                        <span id="label-descricao_4">{{ msg }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+                        <label>CPF</label>
+                        <input type="text" id="info_cpf" readonly="" class="form-control"
+                                placeholder="{% if obj.patient.person.cpf %}{{ obj.patient.person.cpf }}{% else %}-{% endif %}">
+                        <label>Total de Procedimentos</label>
+                        <input type="text" id="info_total_vacinas" readonly="" class="form-control"
+                                placeholder="{{ obj.blood_pressure_measure_quantity }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+                        <label>CNS</label>
+                        <input type="text" id="info_cns" readonly="" class="form-control"
+                                placeholder="{{ obj.patient.person.cns }}">
+                        <label>Possui cadastro individual</label>
+                        <input type="text" id="info_cadastro individual" readonly="" class="form-control"
+                                placeholder="{% if obj.patient.individual_register %}Sim{% else %} Não{% endif %}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+                        <label>DT Nascimento</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                                placeholder="{{ obj.patient.person.birth_date|date:"SHORT_DATE_FORMAT" }}">
+                        <label>Sexo</label>
+                        <input type="text" id="info_sexo" readonly="" class="form-control"
+                                placeholder="{{ obj.patient.person.get_gender_display }}">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mãe</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                        placeholder="{{ obj.patient.person.mother }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Pai</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                        placeholder="{{ obj.patient.person.father }}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Logradouro</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control" placeholder="{{ address.street }}">
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label>Numero</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control" placeholder="{{ address.number }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control" placeholder="{{ address.neighborhood }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>CEP</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control" placeholder="{{ address.cep }}">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Equipe</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                        placeholder="{% if obj.patient.health_team %}{{ obj.patient.health_team }}{% else %}-{% endif %}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Unidade</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                        placeholder="{% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                    </div>
+                </div> <div class="col-md-6">
+                    <div class="form-group">
+                        <label>INE</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                        placeholder="{% if obj.patient.health_team.ine %}{{ obj.patient.health_team.ine }}{% else %}-{% endif %}">
+                    </div>
+                </div> <div class="col-md-6">
+                    <div class="form-group">
+                        <label>CNES</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                        placeholder="{% if obj.patient.health_unit.cnes %}{{ obj.patient.health_unit.cnes }}{% else %}-{% endif %}">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                {% for app in medical_appointments %}
+                                    <div class="card card-body">
+                                        <strong> Atendimento realizado há {{ app.date|timesince }}
+                                            ({{ app.date|date:"SHORT_DATE_FORMAT" }})</strong>
+                                        CIAPS: {% for ciap in app.ciaps.all %}{{ ciap }}; {% endfor %}<br>
+                                        CIDS:  {% for cid in app.cids.all %}{{ cid }}; {% endfor %}<br>
+                                        Exames Avaliados: {% for proc in app.evaluated_procedures.all %}{{ proc.procedure.procedure_code }} {% endfor %}<br>
+                                        Exames Solicitados: {% for proc in app.requested_procedures.all %}{{ proc.procedure.procedure_code }} {% endfor %}<br>
+                                        Profissional/CBO: {{ app.professional }} / {{ app.cbo }}<br>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="col">
+                                {% for proc in procedures %}
+                                    <div class="card card-body">
+                                        <strong> Procedimento {% if proc.request_appointment %}solicitado{% else %}realizado{% endif %} há {{ proc.date|timesince }}
+                                            ({{ proc.date|date:"SHORT_DATE_FORMAT" }})</strong>
+                                        Nome: {{ proc.procedure.name }}<br>
+                                        Código: {{ proc.procedure.procedure_code }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>
+
+</section>
+
+<script>
+    function myFunction() {
+        window.print();
+    };
+</script>
+
+
+<style>
+    td {
+        text-align: center; /* alinhamento horizontal */
+        vertical-align: middle; /* alinhamento vertical */
+    }
+
+    th {
+        text-align: center; /* alinhamento horizontal */
+        vertical-align: middle; /* alinhamento vertical */
+    }
+</style>
+
+</body><!-- /.content -->
+
+<!-- /.content-wrapper -->
+
+<!-- Control Sidebar -->
+
+
+<!-- Main Footer -->
+
+</div>
+<footer class="footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+        Versão 1.0
+    </div>
+    <!-- Default to the left -->
+    <strong> Infatec &copy; Soluções Tecnológicas .</strong> Todos os direitos reservado
+</footer>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+
+<!-- Bootstrap 4 -->
+<script src="{% static 'core/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'core/dist/js/adminlte.min.js' %}"></script>
+<script src="{% static 'core/plugins/select2/js/select2.full.min.js' %}"></script>
+<script nonce="082dd0ba-d12d-4da3-9d08-10fdd98784be">(function (w, d) {
+
+
+    {% block scripts %}
+        <!-- jQuery -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jquery/jquery.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- ChartJS -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/chart.js/Chart.min.js"></script>
+        <!-- Sparkline -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/sparklines/sparkline.js"></script>
+        <!-- JQVMap -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jqvmap/jquery.vmap.min.js"></script>
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jquery-knob/jquery.knob.min.js"></script>
+        <!-- daterangepicker -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/moment/moment.min.js"></script>
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <!-- Summernote -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+        <!-- overlayScrollbars -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/adminlte.js"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/pages/dashboard.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/demo.js"></script>
+
+        <!-- jQuery -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- ChartJS -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/plugins/chart.js/Chart.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="https://appsrv1-147a1.kxcdn.com/adminlte/js/demo.js"></script>
+        <!-- page script -->
+        <script>
+
+        </script>
+
+
+        <script src="../../plugins/jquery/jquery.min.js"></script>
+
+        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script src="../../dist/js/adminlte.min.js?v=3.2.0"></script>
+
+        <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
+
+        <script src="../../plugins/sparklines/sparkline.js"></script>
+
+        <script src="../../dist/js/demo.js"></script>
+
+        <script>
+
+
+        </script>
+
+        <script>
+            window.onload = function () {
+                window.print();
+            }
+        </script>
+        <div id="torrent-scanner-popup" style="display: none;"></div>
+    {% endblock scripts %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

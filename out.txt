@@ -1,0 +1,70 @@
+{
+    'id': 'GEST-9706450', 
+    'cns': '165743922690003', 
+    'cpf': None, 
+    'municipio': 12122, 
+    'pec': 3169807, 
+    'consultas': [
+        {
+            'id': 'CONS-9706450', 
+            'data': datetime.date(2021, 4, 1), 
+            'cids': '||', 
+            'ciaps': '|ABP001|', 
+            'dum': datetime.date(2021, 1, 22), 
+            'ig': 9, 
+            'cns': '165743922690003', 
+            'cpf': None, 
+            'pec': 3169807, 
+            'id_gestante': 'GEST-9706450'
+        }, 
+        {
+            'id': 
+            'CONS-9720742', 
+            'data': datetime.date(2021, 5, 5), 
+            'cids': '||', 
+            'ciaps': '|ABP001|', 
+            'dum': datetime.date(2021, 1, 22), 
+            'ig': 14, 
+            'cns': '165743922690003', 
+            'cpf': None, 
+            'pec': 3169807, 
+            'id_gestante': 'GEST-9706450'
+        }, 
+        {
+            'id': 'CONS-9729960', 
+            'data': datetime.date(2021, 5, 11), 
+            'cids': '||', 
+            'ciaps': '|ABP001|', 
+            'dum': datetime.date(3000, 12, 31), 
+            'ig': 15, 
+            'cns': '165743922690003', 
+            'cpf': None, 
+            'pec': 3169807, 
+            'id_gestante': 'GEST-9706450'
+        }, 
+        {
+            'id': 'CONS-9730164', 
+            'data': datetime.date(2021, 6, 7), 
+            'cids': '||', 
+            'ciaps': '|ABP001|', 
+            'dum': datetime.date(2021, 1, 22), 
+            'ig': 19, 
+            'cns': '165743922690003', 
+            'cpf': None, 
+            'pec': 3169807, 
+            'id_gestante': 'GEST-9706450'
+        }, 
+        {
+            'id': 'CONS-9746341', 
+            'data': datetime.date(2021, 7, 7), 
+            'cids': '||', 
+            'ciaps': '|ABP001|', 
+            'dum': datetime.date(2021, 1, 22), 
+            'ig': 23, 
+            'cns': '165743922690003', 
+            'cpf': None, 
+            'pec': 3169807, 
+            'id_gestante': 'GEST-9706450'
+        }
+    ]
+}

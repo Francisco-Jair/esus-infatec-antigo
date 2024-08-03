@@ -1,0 +1,71 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+
+
+{% block title %}
+    Busca cidadão
+{% endblock title %}
+
+{% block content %}
+
+    <div class="col-md-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Dados do cidadão</h4>
+            </div>
+
+            <form action="#" method="get" id="filter_form" hx-get="{% url 'core:citizen_list_htmx' %}"
+                  hx-target="#item_list" method="post" novalidate>
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-4">
+                            {{ form.cpf|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-4">
+                            {{ form.cns|as_crispy_field }}
+                        </div>
+                        <i class="flag-icon-as"><button type="submit" class="btn btn-dark mt-4">Buscar</button></i>
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+    <section id="list_content">
+        <div class="container-fluid" id="item_list">
+
+            {% include 'core/citizen_list_partial.html' %}
+        </div>
+    </section>
+    <!-- /.content -->
+    <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    </div>
+
+{% endblock content %}
+{% block scripts %}
+    <script src="https://unpkg.com/htmx.org@1.7.0"
+            integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"
+            defer>
+    </script>
+{% endblock scripts %}

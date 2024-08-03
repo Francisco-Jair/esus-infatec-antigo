@@ -1,0 +1,190 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+
+
+{% block title %}Painel de Controle{% endblock title %}
+{% block pageName %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <medium><strong>Links Úteis</strong></medium>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+{% endblock pageName %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/toastr/toastr.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-dark">
+                        <div class="inner">
+                            <h3>e-SUS APS</h3>
+
+
+                            <p>Clique na imagem para Visitar a página</p>
+                        </div>
+                        <div class="icon">
+                            <a href="https://sisaps.saude.gov.br/esus/" target="_blank" rel="noopener noreferrer"><img
+                                    class="img-thumbnail" src="https://files.fm/thumb_show.php?i=tr5ejeufb"
+                                    alt="ESUS">
+                            </a>
+                        </div>
+                        <a href="https://sisaps.saude.gov.br/esus/" target="_blank" rel="noopener noreferrer"
+                           class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-primary">
+                        <div class="inner">
+                            <h3>Infatec</h3>
+
+
+                            <p>Clique na imagem para Visitar a página</p>
+                        </div>
+                        <div class="icon">
+                            <a href="https://infatec.net.br/" target="_blank" rel="noopener noreferrer"><img
+                                    class="img-thumbnail" src="https://files.fm/thumb_show.php?i=2wc9cfar8"
+                                    alt="INFATEC">
+                            </a>
+                        </div>
+                        <a href="" target="_blank" rel="noopener noreferrer"
+                           class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-success">
+                        <div class="inner">
+                            <h3>Previne Brasil</h3>
+
+
+                            <p>Clique na imagem para Visitar a página</p>
+                        </div>
+                        <div class="icon">
+                            <a href="https://sisab.saude.gov.br/paginas/acessoRestrito/relatorio/federal/indicadores/indicadorPainel.xhtml" target="_blank" rel="noopener noreferrer"><img
+                                    class="img-thumbnail" src="https://files.fm/thumb_show.php?i=5rtfysg4g"
+                                    alt="indicadores">
+                            </a>
+                        </div>
+                        <a href="https://sisaps.saude.gov.br/esus/" target="_blank" rel="noopener noreferrer"
+                           class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-red">
+                        <div class="inner">
+                            <h3>Ministerio </h3>
+
+
+                            <p>Clique na imagem para Visitar a página</p>
+                        </div>
+                        <div class="icon">
+                            <a href="https://www.gov.br/saude/pt-br" target="_blank" rel="noopener noreferrer"><img
+                                    class="img-thumbnail" src="https://files.fm/thumb_show.php?i=s78ukbvt5"
+                                    alt="Ministerio">
+                            </a>
+                        </div>
+                        <a href="https://sisaps.saude.gov.br/esus/" target="_blank" rel="noopener noreferrer"
+                           class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+
+                <!-- ./col -->
+            </div>
+            <div class="bar bar-success" style="width: 35%;"></div>
+            <div class="bar bar-warning" style="width: 20%;"></div>
+            <div class="bar bar-danger" style="width: 10%;"></div>
+        </div>
+        <div class="progress">
+            <div class="bar bar-success" style="width: 35%;"></div>
+            <div class="bar bar-warning" style="width: 20%;"></div>
+            <div class="bar bar-danger" style="width: 10%;"></div>
+        </div>
+        <div class="progress">
+            <div class="bar bar-success" style="width: 35%;"></div>
+            <div class="bar bar-warning" style="width: 20%;"></div>
+            <div class="bar bar-danger" style="width: 10%;"></div>
+        </div>
+
+        </div>
+        </div>
+
+        </div>
+        </div>
+        <!-- /.row -->
+        </div>
+
+
+        <!-- /.col -->
+        </div>
+
+    </section>
+    <!-- /.content -->
+{% endblock content %}
+
+<script src="{% static 'core/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+<script src="{% static 'core/plugins/toastr/toastr.min.js' %}"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        {% if messages %}
+
+            $(function () {
+                Toast.fire({
+                    icon: 'success',
+                    {% for message in messages %}
+                        title: '{{ message }}',
+                    {% endfor %}
+                })
+            });
+        {% endif %}
+
+    });
+
+</script>
+
+
+
+

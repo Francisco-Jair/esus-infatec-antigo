@@ -1,0 +1,78 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+
+
+{% block title %}
+    Listagem de indicadores por unidade de saúde
+{% endblock title %}
+
+{% block content %}
+   <section class="content">
+      <div class="container-fluid">
+        {% crispy form %}
+        <div class="row">
+          <div class="col-md-12">
+    
+    {% for indicator_type, unit_list in page_obj.items %}        
+    <div class="card">
+      <div class="card-header">
+        <h3 class="text-primary">Listagem de indicadores por unidade de saúde </h3>
+
+      </div>
+      <div class="card-body p-0">
+        
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th style="width: 10px">CNES</th>
+              <th>Nome</th>
+              <th>Denominador</th>
+              <th>Numerador</th>
+              <th>Indicador</th>
+              <th style="width: 40px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for unit in unit_list %}
+            <tr>
+              <td>{{ unit.cnes }}</td>
+              <td>{{ unit.name }}</td>
+              <td>{{ unit.denominator }}</td>
+              <td>{{ unit.numerator }}</td>
+              <td>
+              <div class="progress progress-xs">
+                <div class={% if unit.indicator < 50 %}"progress-bar bg-danger"{% elif unit.indicator > 80 %}"progress-bar bg-success"{% else %}"progress-bar bg-warning"{% endif %} style="width: {{ unit.indicator }}%"></div>
+              </div>
+              </td>
+              <td><span class="badge bg-danger">{{ unit.indicator }}%</span></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endfor %}
+
+          </div>
+          <!-- /.col -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+{% endblock content %}
+{% block scripts %}
+    <script>
+    $('form#id-calculateindicator').submit(function(){
+        $(this).find(':input[type=submit]').prop('disabled', true).val('Salvando...');
+        $(this).find(':button').prop('disabled', true);
+        $(this).find('.spinner-border').removeAttr('hidden');
+    });
+
+    </script>
+    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
+{% endblock scripts %}

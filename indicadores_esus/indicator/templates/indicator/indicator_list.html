@@ -1,0 +1,308 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+
+
+{% block title %}
+    Listagem de indicadores calculados
+{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid">
+
+
+        {% crispy form %}
+
+        <h1>Indicadores calculados</h1>
+
+        <section id="list_content">
+            <div class="container-fluid" id="item_list">
+                {% for base_ind in page_obj %}
+                    <div class="alert alert-dark" role="alert">
+                        <h4>{{ base_ind.quadrimester }} - Indicador Sintético Final: {{ base_ind.get_isf }}</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Indicador</th>
+                            <th>Meta</th>
+                            <th>Nota</th>
+                            <th>Peso</th>
+                            <th>Nota ponderada</th>
+                            <th>Numerador</th>
+                            <th>Denominador</th>
+                            <th>Situação</th>
+                            <th>Gerado em:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in base_ind.indicators.calculated_indicators_list %}
+                            <tr>
+                                <td>
+                                    {{ item.get_type_display }}
+                                </td>
+                                <td>{% if item.indicator_index <= 25 %}
+                                    <h5><span class="badge badge-danger">{{ item.indicator_index|floatformat:2 }}</span>
+                                    </h5>
+                                {% elif item.indicator_index <= 50 %}
+                                    <h5><span
+                                            class="badge badge-warning">{{ item.indicator_index|floatformat:2 }}</span>
+                                    </h5>
+                                {% elif item.indicator_index <= 75 %}
+                                    <h5><span
+                                            class="badge badge-primary">{{ item.indicator_index|floatformat:2 }}</span>
+                                    </h5>
+
+                                {% else %}
+                                    <h5><span
+                                            class="badge badge-success">{{ item.indicator_index|floatformat:2 }}</span>
+                                    </h5>
+                                {% endif %}
+
+
+                                </td>
+                                <td>
+                                    {{ item.pattern.goal }}
+                                </td>
+                                <td>
+                                    {{ item.result|floatformat:2 }}
+                                </td>
+                                <td>
+                                    {{ item.pattern.weight }}
+                                </td>
+                                <td>
+                                    {{ item.npi|floatformat:2 }}
+                                </td>
+                                <td>
+                                    {{ item.numerator }}
+                                </td>
+                                <td>
+                                    {{ item.denominator }}
+                                </td>
+                                <td>
+                                    {{ item.get_status_display }}
+                                </td>
+                                <td>
+                                    {{ item.calculated_at|date:'SHORT_DATETIME_FORMAT' }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                    <div class="card card-columns">
+                        <div class="card-header">
+                            <h3 class="card-title">Detalhes</h3>
+
+                            <div class="card-tools">
+
+                                <!-- This will cause the card to collapse when clicked -->
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i></button>
+                                <!-- This will cause the card to maximize when clicked -->
+                                <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
+                                        class="fas fa-expand"></i></button>
+                                <!-- This will cause the card to be removed when clicked -->
+                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                        class="fas fa-times"></i></button>
+                            </div>
+                            <!-- /.card-tools -->
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <!-- Large modal -->
+                            <button type="button" class="btn btn-info " data-toggle="modal"
+                                    data-target="#id_modal_{{ forloop.counter }}">Mais Informações
+                            </button>
+
+                            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                                 aria-labelledby="myLargeModalLabel" aria-hidden="true" id="id_modal_{{ forloop.counter }}">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="col-xs-4 col-xs-offset-4"><div class="card-deck">
+                                            <div class="card bg-gradient-info">
+                                                <div class="card-body text-center">
+                                                    <div class="text-center">
+                                                        <img src="{% static 'core/dist/img/indicador1.png' %}"
+                                                             class="rounded"
+                                                             alt="...">
+                                                    </div>
+                                                    <p class="card-text">
+                                                        Consulta Pré-natal</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Indicador I</h5>
+                                                    <p class="card-text">Numerador {{ base_ind.1.numerator }}<br>
+                                                        Denominador {{ base_ind.1.denominator }}<br>
+                                                        <strong>{{ base_ind.1.index }}%</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-gradient-info">
+
+                                                <div class="card-body text-center">
+                                                    <div class="text-center">
+                                                        <img src="{% static 'core/dist/img/indicador2.png' %}"
+                                                             class="rounded"
+                                                             alt="...">
+                                                    </div>
+                                                    <p class="card-text">Exames SIFILIS / HIV</p>
+
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Indicador II</h5>
+                                                    <p class="card-text">Numerador {{ base_ind.2.numerator }}<br>
+                                                        Denominador {{ base_ind.2.denominator }}<br>
+                                                        <strong>{{ base_ind.2.index }}%</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-gradient-info">
+                                                <div class="card-body text-center">
+                                                    <div class="text-center">
+                                                        <img src="{% static 'core/dist/img/indicador3.png' %}"
+                                                             class="rounded"
+                                                             alt="...">
+                                                    </div>
+                                                    <p class="card-text">Atendimento Odontologico</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Indicador 3</h5>
+                                                    <p class="card-text">Numerador {{ base_ind.3.numerator }}<br>
+                                                        Denominador {{ base_ind.3.denominator }}<br>
+                                                        <strong>{{ base_ind.3.index }}%</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-gradient-success">
+                                                <div class="card-body text-center">
+                                                    <div class="text-center">
+                                                        <img src="{% static 'core/dist/img/indicador4.png' %}"
+                                                             class="rounded"
+                                                             alt="...">
+                                                    </div>
+                                                    <p class="card-text">Exame Citopatológico </p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Indicador 4</h5>
+                                                    <p class="card-text">Numerador {{ base_ind.4.numerator }}<br>
+                                                        Denominador {{ base_ind.4.denominator }}<br>
+                                                        <strong>{{ base_ind.4.index }}%</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="card-deck">
+                                            <div class="card bg-gradient-danger">
+                                                <div class="card-body text-center">
+                                                    <div class="text-center">
+                                                        <img src="{% static 'core/dist/img/indicador5.png' %}"
+                                                             class="rounded"
+                                                             alt="...">
+                                                    </div>
+                                                    <p class="card-text">Cobertura Vacinal</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Indicador 5</h5>
+                                                    <p class="card-text">Numerador {{ base_ind.5.numerator }}<br>
+                                                        Denominador {{ base_ind.5.denominator }}<br>
+                                                        <strong>{{ base_ind.5.index }}%</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-secondary">
+
+                                                <div class="card-body text-center">
+                                                    <div class="text-center">
+                                                        <img src="{% static 'core/dist/img/indicador6.png' %}"
+                                                             class="rounded"
+                                                             alt="...">
+                                                    </div>
+                                                    <p class="card-text">Hipertensão Arterial</p>
+
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Indicador 6</h5>
+                                                    <p class="card-text">Numerador {{ base_ind.6.numerator }}<br>
+                                                        Denominador {{ base_ind.6.denominator }}<br>
+                                                        <strong>{{ base_ind.6.index }}%</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-secondary">
+                                                <div class="card-body text-center">
+                                                    <div class="text-center">
+                                                        <img src="{% static 'core/dist/img/indicador7.png' %}"
+                                                             class="rounded"
+                                                             alt="...">
+                                                    </div>
+                                                    <p class="card-text">Consulta e Hemoglobina Glicada</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Indicador 7</h5>
+                                                    <p class="card-text">Numerador {{ base_ind.7.numerator }}<br>
+                                                        Denominador {{ base_ind.7.denominator }}<br>
+                                                        <strong>{{ base_ind.7.index }}%</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-warning">
+                                                <div class="card-body text-center">
+                                                    <div class="text-center">
+                                                        <img src="{% static 'core/dist/img/isf.png' %}" class="rounded"
+                                                             alt="...">
+                                                    </div>
+                                                    <p class="card-text">Indicador Sintetico Final</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">ISF</h5>
+                                                    <p class="card-text"><br>
+                                                        <strong>{{ base_ind.get_isf }}</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                {% endfor %}
+
+
+    </div>
+    </section>
+
+
+    </div>
+
+{% endblock content %}
+{% block scripts %}
+    <script>
+        $('form#id-calculateindicator').submit(function () {
+            $(this).find(':input[type=submit]').prop('disabled', true).val('Salvando...');
+            $(this).find(':button').prop('disabled', true);
+            $(this).find('.spinner-border').removeAttr('hidden');
+        });
+
+    </script>
+    <script src="https://unpkg.com/htmx.org@1.7.0"
+            integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"
+            defer></script>
+{% endblock scripts %}

@@ -1,0 +1,39 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CNS</th>
+            <th>CPF</th>
+            <th>Data da última menstruação</th>
+            <th>Data provável de parto</th>
+            <th>Consultas válidas</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pregnant in page_obj %}
+        <tr>
+            <td>
+                {{ pregnant.name }}
+            </td>
+            <td>
+                {{ pregnant.cns }}
+            </td>
+            <td>
+                {{ pregnant.cpf }}
+            </td>
+            <td>
+                {{ pregnant.dum|date:"SHORT_DATE_FORMAT" }}
+            </td>
+            <td>
+                {{ pregnant.dpp|date:"SHORT_DATE_FORMAT" }}
+            </td>
+            <td>
+                {% for app in pregnant.person_appointments_set.all %}
+                {{ forloop.counter }}-{{ app.appointment_id }}-{{ app.date|date:"SHORT_DATE_FORMAT" }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'footer_paginator.html' %}

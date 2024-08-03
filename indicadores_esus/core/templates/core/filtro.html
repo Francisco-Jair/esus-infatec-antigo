@@ -1,0 +1,208 @@
+{% extends 'core/starter.html' %}
+
+{% load static %}
+
+<style>
+    .alert {
+        width: 40%;
+    }
+</style>
+
+
+{% block title %}Painel de Controle{% endblock title %}
+{% block pageName %}
+
+{% endblock pageName %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/plugins/toastr/toastr.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <div class="col-md-12">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-check-square"></i>
+                                <div class="badge alert-dark"> Selecione um filtro para a operacionalização</div>
+                            </h3>
+                        </div>
+
+                        <div class="card-body clearfix">
+                            <strong class="text-right">Filtro</strong>
+
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                    data-select2-id="17" tabindex="-1" aria-hidden="true">
+                                <optiondata-select2-id
+                                ="19">Alabama</option>
+
+                                <option data-select2-id="95">No Quadrimestre</option>
+                                <option data-select2-id="96">Necessita de uma Atenção especial</option>
+                                <option data-select2-id="97">Pendentes</option>
+                                <option data-select2-id="98">Aceito</option>
+                                <option data-select2-id="99">Cadastrado de Forma errada</option>
+                                <option selected="selected" data-select2-id="100">Todos</option>
+                            </select>
+                            <strong>Equipe</strong>
+
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                    data-select2-id="17" tabindex="-1" aria-hidden="true">
+                                <optiondata-select2-id
+                                ="19">Alabama</option>
+                                <option data-select2-id="94">UBS BAU</option>
+
+                                <option data-select2-id="94">UBS CABECEIRA DOS CAVALOS 2464497 - M</option>
+                                <option data-select2-id="94">UBS CALDEIROES 2453991 - M</option>
+                                <option data-select2-id="94">UBS CAMPO DE BELEM 2453940 - M</option>
+                                <option data-select2-id="94">UBS CAMPO DE BELEM II 7926871 - M</option>
+                                <option data-select2-id="94">UBS CANGALHEIRO 2454025 - M</option>
+                                <option data-select2-id="94">UBS CASTELO BRANCO 2453800 - M</option>
+                                <option data-select2-id="94">UBS CENTRO 2454041 - M</option>
+                                <option data-select2-id="94">UBS CHAPADA 2453762 - M</option>
+                                <option data-select2-id="94">UBS COHAB 3694739 - M</option>
+                                <option data-select2-id="94">UBS COHAB II 7926928 - M</option>
+                                <option data-select2-id="94">UBS CRISTINO CRUZ 2453754 - M</option>
+                                <option data-select2-id="94">UBS DR JOSE DASSUNCAO BRANDAO BREJINHO 2453770 - M</option>
+                                <option data-select2-id="94">UBS EUGENIO COUTINHO 7926863 - M</option>
+                                <option data-select2-id="94">UBS FAZENDINHA 5378818 - M</option>
+                                <option data-select2-id="94">UBS ITAPECURUZINHO 2453975 - M</option>
+                                <option data-select2-id="94">UBS LUIZA QUEIROZ 9004580 - M</option>
+                                <option data-select2-id="94">UBS MUTIRAO 2453894 - M</option>
+                                <option data-select2-id="94">UBS NAZARE DO BRUNO 2453738 - M</option>
+                                <option data-select2-id="94">UBS NOVA CAXIAS 2453878 - M</option>
+                                <option data-select2-id="94">UBS PAMPULHA 3179761 - M</option>
+                                <option data-select2-id="94">UBS PIQUIZEIRO 2453797 - M</option>
+                                <option data-select2-id="94">UBS PIRAJA 6304761 - M</option>
+                                <option data-select2-id="94">UBS PONTE 2453843 - M</option>
+                                <option data-select2-id="94">UBS POVOADO CAXIRIMBU 5616794 - M</option>
+                                <option data-select2-id="94">UBS POVOADO SANTO ANTONIO 5616786 - M</option>
+                                <option data-select2-id="94">UBS RODAGEM 2453711 - M</option>
+                                <option data-select2-id="94">UBS SALOBRO 2454017 - M</option>
+                                <option data-select2-id="94">UBS SANTA RITA 6466060 - M</option>
+                                <option data-select2-id="94">UBS SAO FRANCISCO 2453983 - M</option>
+                                <option data-select2-id="94">UBS TREZIDELA 2453886 - M</option>
+                                <option data-select2-id="94">UBS VILA ALECRIM 7754833 - M</option>
+                                <option data-select2-id="94">UBS VILA ARIAS 5616778 - M</option>
+                                <option data-select2-id="94">UBS VILA SAO JOSE 7926855 - M</option>
+                                <option data-select2-id="94">UBS VOLTA REDONDA 2453959 - M</option>
+                                <option data-select2-id="94">UEMA 9086455 06352421000168 M</option>
+                                <option data-select2-id="94">UNIDADE BASICA DE SAUDE DA VILA PARAISO 0101818 - M
+                                </option>
+                                <option data-select2-id="94">UNIDADE DE CAXIAS 0818070 10999381001947 M</option>
+                                <option data-select2-id="94">UNIDADE DE PRONTO ATENDIMENTO UPA 9037780 - M</option>
+                                <option data-select2-id="94">UNIDADE DE TRATAMENTO FORA DO DOMICILIO TFD 2813785 - M
+                                </option>
+                                <option data-select2-id="94">UNIDADE DE VIGILANCIA SANITARIA 2454009 - M</option>
+                                <option data-select2-id="94">UNIOFT 6167500 03542824000181 M</option>
+                                <option data-select2-id="94">USA 01 SAMU 192 3696731 - M</option>
+                                <option data-select2-id="94">USA 02 SAMU 192 7603924 - M</option>
+                                <option data-select2-id="94">USB 01 SAMU 192 6944922 - M</option>
+                                <option data-select2-id="94">USB 02 SAMU 192 6944930 - M</option>
+                                <option data-select2-id="94">USB 03 SAMU 192 7529643 - M</option>
+                                <option data-select2-id="94">USB 04 SAMU 192 7529651 - M</option>
+                                <option data-select2-id="94">USB 05 SAMU 192</option>
+                                <option selected="selected" data-select2-id="100">Todos</option>
+                            </select><br>
+                            <div class="input-group input-group-sm">
+                                <input type="text" placeholder="Unidade (digite o CNES ou 0 para SEM UNIDADE)"
+                                       class="form-control">
+                                <span class="input-group-append">
+<button type="button" class="btn btn-primary btn-flat">Ir!</button>
+</span>
+                            </div>
+                            <br>
+                            <div class="input-group input-group-sm">
+                                <input type="text" placeholder="Busca por CPF "
+                                       class="form-control">
+                                <span class="input-group-append">
+<button type="button" class="btn btn-primary btn-flat">Ir!</button>
+</span>
+                            </div>
+                            <br>
+
+                            <div class="input-group input-group-sm">
+                                <input type="text" placeholder="Busca por nome " class="form-control">
+                                <span class="input-group-append">
+<button type="button" class="btn btn-primary btn-flat">Ir!</button>
+</span>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div><br><br><br>
+
+
+        <!-- /.col -->
+
+    </section>
+    <!-- /.content -->
+{% endblock content %}
+
+<script src="{% static 'core/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'core/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'core/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+<script src="{% static 'core/plugins/toastr/toastr.min.js' %}"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        {% if messages %}
+
+            $(function () {
+                Toast.fire({
+                    icon: 'success',
+                    {% for message in messages %}
+                        title: '{{ message }}',
+                    {% endfor %}
+                })
+            });
+        {% endif %}
+
+    });
+
+</script>
+
+
+
+

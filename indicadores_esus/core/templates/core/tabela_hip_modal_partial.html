@@ -1,0 +1,220 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-footer">
+            <h4 class="modal-xl left">
+                <i class="fa fa-baby-carriage"> {{ obj.patient.person.name }} </i>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span
+                        aria-hidden="true">×</span></button>
+            </h4>
+        </div>
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+                        <label>Nome Completo</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="{{ obj.dpp|date:"SHORT_DATE_FORMAT" }}">
+
+                        <label>CPF</label>
+
+                        <input type="text" id="info_cpf" readonly="" class="form-control"
+                               placeholder="
+                                       {% if obj.patient.person.cpf %}{{ obj.patient.person.cpf }}{% else %}-{% endif %}">
+
+                        <label>Nivel de Ensino</label>
+                        <input type="text" id="info_total_consultas" readonly="" class="form-control"
+                               placeholder="{{ obj.medical_appointments_quantity }}">
+
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+
+                        <label>CNS</label>
+                        <input type="text" id="info_cns" readonly="" class="form-control"
+                               placeholder="{{ obj.patient.person.cns }}">
+
+                        <label>Procedimentos</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="-">
+
+                        <label>Foi Unificado</label>
+                        <input type="text" id="info_total_consultas" readonly="" class="form-control"
+                               placeholder="{{ obj.medical_appointments_quantity }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+
+
+                        <label>DT Nascimento</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="{{ obj.patient.person.birth_date|date:"SHORT_DATE_FORMAT" }}">
+
+
+                        <label>UBS Vinculada</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="
+                                       {% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <hr>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mãe</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ obj.patient.person.mother }}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Pai</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ obj.patient.person.father }}">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Logradouro</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ address.street }}">
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label>Numero</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ address.number }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ address.neighborhood }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>CEP</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ address.cep }}">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <hr>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Equipe</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="
+                                       {% if obj.patient.health_team %}{{ obj.patient.health_team }}{% else %}-{% endif %}">
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Unidade</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="
+                                       {% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <p>
+                            {% comment %} <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1"#}
+                                role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Consultas#}
+                                  com Enfermeiro</a> {% endcomment %}#}
+                            <button class="btn btn-success" type="button" data-toggle="collapse"
+                                    data-target="#medical_appointments" aria-expanded="false"
+                                    aria-controls="medical_appointments">Procedimentos
+                            </button>
+                            <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                    data-target="#medical_appointments" aria-expanded="false"
+                                    aria-controls="medical_appointments">Atendimentos
+                            </button>
+
+                        </p>
+                        <div class="row">
+                            {% comment %} <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <div class="card card-body">
+                                    <strong> Atendimento realizado a 2 meses e 4 dias</strong>
+                                    CIAPS: | W78 |<br>
+
+                                    CIDS: | Z34 | R51 |<br>
+
+                                    Exames Avaliados: | |<br>
+
+                                    Exames Solicitados: | |<br>
+
+                                    Profissional CBO: 225142 - MÉDICO DA ESTRATÉGIA DE SAÚDE DA FAMÍLIA<br>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                            <div class="col">
+                                <div class="collapse multi-collapse" id="medical_appointments">
+                                    {% for app in medical_appointments %}
+                                        <div class="card card-body">
+                                            <strong> Atendimento realizado a {{ app.date|timesince }}
+                                                ({{ app.date|date:"SHORT_DATE_FORMAT" }})</strong>
+                                            CIAPS: {{ app.ciaps }}<br>
+                                            CIDS: {{ app.cids }}<br>
+                                            Exames Avaliados: {{ app.exams }}<br>
+                                            Exames Solicitados: {{ app.exams }}<br>
+                                            Profissional/CBO: {{ app.professional }} / {{ app.cbo }}<br>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="collapse multi-collapse" id="medical_appointments">
+                                    {% for app in medical_appointments %}
+                                        <div class="card card-body">
+                                            <strong> Atendimento realizado a {{ app.date|timesince }}
+                                                ({{ app.date|date:"SHORT_DATE_FORMAT" }})</strong>
+                                            CIAPS: {{ app.ciaps }}<br>
+                                            CIDS: {{ app.cids }}<br>
+                                            Exames Avaliados: {{ app.exams }}<br>
+                                            Exames Solicitados: {{ app.exams }}<br>
+                                            Profissional/CBO: {{ app.professional }} / {{ app.cbo }}<br>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+</div>
+
+
+<script src="exportToExcel.js" defer></script>

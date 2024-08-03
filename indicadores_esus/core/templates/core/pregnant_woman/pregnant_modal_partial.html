@@ -1,0 +1,288 @@
+{% load static %}
+
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <div class="modal-dialog-scrollable">
+            <h4 class="modal-xl left">
+            <img src="{% static 'core/dist/img/gravida.png' %}"> <strong> {{ obj.patient.person.name }} </strong> </i>
+                <button type="button" class="close text-danger" data-dismiss="modal" aria-label=" "><span
+                        aria-hidden="true"> <strong> <h6> </h6> </strong>  </span></button>
+            </h4>
+
+            </div>
+    <div class="float-lg-right">
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        {% if obj %}
+                        <a href="{% url 'core:print_pregnant_detail' obj.pk %}" target="_blank" class="btn btn-primary btn-sm">
+                            <i class="fa fa-print"></i> Imprimir Ficha</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <p style="margin-bottom: 0px">
+                        <b>Indicador 1</b><br>
+                        Gestantes com 6 consultas pré-natal
+                    </p>
+
+
+                    <span id="label-indicador_1">
+                        {% if obj.first_indicator_achieved %}
+                            <span class="badge badge-success text-white"> Alcançado <i class="fa fa-close"></i></span>
+                        {% else %}
+                            <span class="badge badge-danger text-white"> Não Alcançado <i
+                                    class="fa fa-close"></i></span>
+                        {% endif %}
+                    </span>
+                    <hr style="margin-top: 10px; margin-bottom: 10px">
+                    {% for msg in obj.indicator_1_msgs %}
+                        <span id="label-descricao_1">{{ msg }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4">
+                    <p style="margin-bottom: 0px">
+                        <b>Indicador 2</b><br>
+                        Gestantes com teste rápido de HIV e Sifilis
+                    </p>
+                    <span id="label-indicador_2">
+                        {% if obj.second_indicator_achieved %}
+                            <span class="badge badge-success text-white"> Alcançado <i class="fa fa-close"></i></span>
+                        {% else %}
+                            <span class="badge badge-danger text-white"> Não Alcançado <i
+                                    class="fa fa-close"></i></span>
+                        {% endif %}
+                    </span>
+                    <hr style="margin-top: 10px; margin-bottom: 10px">
+                    {% for msg in obj.indicator_2_msgs %}
+                        <span id="label-descricao_2">{{ msg }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4">
+                    <p style="margin-bottom: 0px">
+                        <b>Indicador 3</b><br>
+                        Gestantes com atendimento odontológico
+                    </p>
+                    <span id="label-indicador_3">
+                        {% if obj.third_indicator_achieved %}
+                            <span class="badge badge-success text-white"> Alcançado <i class="fa fa-close"></i></span>
+                        {% else %}
+                            <span class="badge badge-danger text-white"> Não Alcançado <i
+                                    class="fa fa-close"></i></span>
+                        {% endif %}
+                    </span>
+                    <hr style="margin-top: 10px; margin-bottom: 10px">
+                    {% for msg in obj.indicator_3_msgs %}
+                        <span id="label-descricao_3">{{ msg }}</span>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+                        <label>Data prevista para nascimento</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="{{ obj.dpp|date:"SHORT_DATE_FORMAT" }}">
+
+                        <label>CPF</label>
+
+                        <input type="text" id="info_cpf" readonly="" class="form-control"
+                               placeholder="{% if obj.patient.person.cpf %}{{ obj.patient.person.cpf }}{% else %}Não Cadastrado{% endif %}">
+
+                        <label>Total de Consultas</label>
+                        <input type="text" id="info_total_consultas" readonly="" class="form-control"
+                               placeholder="{{ obj.medical_appointments_quantity }}">
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+                        <label>Data da última mestruação</label>
+                        <input type="text" id="info_dum" readonly="" class="form-control"
+                               placeholder="{{ obj.dum|date:"SHORT_DATE_FORMAT" }}">
+
+
+                        <label>CNS</label>
+                        <input type="text" id="info_cns" readonly="" class="form-control"
+                               placeholder="{{ obj.patient.person.cns }}">
+
+                        <label>Consultas com Dentista</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="{{ obj.dental_appointments_quantity }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group-lg">
+
+                        <label>Possui cadastro individual</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="{% if obj.patient.individual_register %}Sim{% else %} Não{% endif %}">
+
+                        <label>DT Nascimento</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="{{ obj.patient.person.birth_date|date:"SHORT_DATE_FORMAT" }}">
+
+                        <label>UBS Vinculada</label>
+                        <input type="text" id="info_data_prevista_nascimento" readonly="" class="form-control"
+                               placeholder="{% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <hr>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mãe</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ obj.patient.person.mother }}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Pai </label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder=" {{ obj.patient.person.father }}">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Logradouro</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ address.street }}">
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label>Numero</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ address.number }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ address.neighborhood }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>CEP</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{{ address.cep }}">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <hr>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Equipe</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{% if obj.patient.health_team %}{{ obj.patient.health_team }}{% else %}-{% endif %}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Unidade</label>
+                        <input type="text" id="info_no_mae" readonly="" class="form-control"
+                               placeholder="{% if obj.patient.health_unit %}{{ obj.patient.health_unit }}{% else %}-{% endif %}">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <p>
+                            <button class="btn btn-success" type="button" data-toggle="collapse"
+                                    data-target="#medical_appointments" aria-expanded="false"
+                                    aria-controls="medical_appointments">Consultas
+                            </button>
+                            <button class="btn btn-info" type="button" data-toggle="collapse"
+                                    data-target="#procedures" aria-expanded="false"
+                                    aria-controls="procedures">Procedimentos
+                            </button>
+                            <button class="btn btn-dark" type="button" data-toggle="collapse"
+                                    data-target="#dental_appointments" aria-expanded="false"
+                                    aria-controls="dental_appointments">Consultas Odontológicas
+                            </button>
+
+                            <button class="btn btn-danger" type="button" data-toggle="collapse"
+                                    data-target=".multi-collapse" aria-expanded="false"
+                                    aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3">
+                                Fechar/Abrir Todos
+                            </button>
+                        </p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="collapse multi-collapse" id="medical_appointments">
+                                    {% for app in medical_appointments %}
+                                        <div class="card card-body">
+                                            <strong> Atendimento realizado há {{ app.date|timesince }}
+                                                ({{ app.date|date:"SHORT_DATE_FORMAT" }})</strong>
+                                            CIAPS: {% for ciap in app.ciaps.all %}{{ ciap }}; {% endfor %}<br>
+                                            CIDS: {% for cid in app.cids.all %}{{ cid }}; {% endfor %}<br>
+                                            Exames Avaliados: {% for proc in app.evaluated_procedures.all %}{{ proc.procedure.procedure_code }} {% endfor %}<br>
+                                            Exames Solicitados: {% for proc in app.requested_procedures.all %}{{ proc.procedure.procedure_code }} {% endfor %}<br>
+                                            Profissional/CBO: {{ app.professional }} / {{ app.cbo }}<br>
+                                            Equipe: {{ app.health_team }}<br>
+                                            Unidade: {{ app.health_unit }}<br>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="collapse multi-collapse" id="procedures">
+                                    {% for proc in procedures %}
+                                        <div class="card card-body">
+                                            <strong> Procedimento {% if proc.request_appointment %}solicitado{% else %}realizado{% endif %} há {{ proc.date|timesince }}
+                                                ({{ proc.date|date:"SHORT_DATE_FORMAT" }})</strong>
+                                            Nome: {{ proc.procedure.name }}<br>
+                                            Código: {{ proc.procedure.procedure_code }}<br>
+                                            Profissional/CBO: {{ proc.professional }} / {{ proc.cbo }}<br>
+                                            Equipe: {{ proc.health_team }}<br>
+                                            Unidade: {{ proc.health_unit }}<br>    
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="collapse multi-collapse" id="dental_appointments">
+                                    {% for app in dental_appointments %}
+                                        <div class="card card-body">
+                                            <strong> Atendimento realizado há {{ app.date|timesince }}
+                                                ({{ app.date|date:"SHORT_DATE_FORMAT" }})</strong>
+                                            CIAPS: {% for ciap in app.ciaps.all %}{{ ciap }}; {% endfor %}<br>
+                                            CIDS: {% for cid in app.cids.all %}{{ cid }}; {% endfor %}<br>
+                                            Profissional/CBO: {{ app.professional }} / {{ app.cbo }}<br>
+                                            Equipe: {{ app.health_team }}<br>
+                                            Unidade: {{ app.health_unit }}<br>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+    </div>
+</div>

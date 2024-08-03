@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">
+            <i class="fa fa-child"></i>
+            <div class="badge alert-dark"> Indicador 5
+            </div>
+        </h4>
+    </div>
+
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text-dark"><strong>Número de Crianças </strong>
+                </p>
+                <span class="alert alert-dark"><strong>{{ page_obj.paginator.count }}</strong></span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<a id="btn_print_all" href="{% url 'core:print_children_list' %}" target="_blank" class="btn btn-dark" onmouseover="print_filters()"><i class="fa fa-print"></i> Imprimir Dados</a>
+<a id="btn_print_not_achieved" href="{% url 'core:print_children_list' %}?type=not_achieved" target="_blank" class="btn btn-danger" onmouseover="print_filters()"><i class="fa fa-print"></i> Imprimir Não Alcançados</a>
+<a id="btn_print_achieved" href="{% url 'core:print_children_list' %}?type=achieved" target="_blank" class="btn btn-success" onmouseover="print_filters()"><i class="fa fa-print"></i> Imprimir Alcançados</a>
